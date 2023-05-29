@@ -4,52 +4,52 @@ import java.util.ArrayList;
 
 public class Cell {
     private final float x;
-    private final  float y;
+    private final float y;
     private CellType cellType;
     private ArrayList<Cell> walls = new ArrayList<>();
 
-    public Cell(float x, float y){
+    public Cell(float x, float y) {
         this.x = x;
         this.y = y;
         this.cellType = CellType.CELL;
     }
 
-    public float getX(){
+    public float getX() {
         return this.x;
     }
 
-    public float getY(){
+    public float getY() {
         return this.y;
     }
 
     @Override
-    public String toString(){
-        return "("+ this.x + ","+this.y+")";
+    public String toString() {
+        return "(" + this.x + "," + this.y + ")";
     }
 
     @Override
-    public boolean equals(Object o){
-        if (o == this){
+    public boolean equals(Object o) {
+        if (o == this) {
             return true;
         }
-        if (!(o instanceof Cell gridPoint)){
-            return  false;
+        if (!(o instanceof Cell gridPoint)) {
+            return false;
         }
 
         return gridPoint.getX() == this.getX() && gridPoint.getY() == this.getY();
     }
 
-    public boolean withinBox(Cell bottomLeftCorner,Cell topRightCorner){
+    public boolean withinBox(Cell bottomLeftCorner, Cell topRightCorner) {
         return this.y >= bottomLeftCorner.getY() && this.y <= topRightCorner.getY() &&
                 this.x >= bottomLeftCorner.getX() && this.x <= topRightCorner.getX();
     }
 
-    public ArrayList<Cell> cellWalls(){
+    public ArrayList<Cell> cellWalls() {
         ArrayList<Cell> Walls = new ArrayList<>();
-        Cell upperWall = new Cell(x, (float) (y +0.5));
+        Cell upperWall = new Cell(x, (float) (y + 0.5));
         Cell lowerWall = new Cell(x, (float) (y - 0.5));
-        Cell leftWall = new Cell((float) (x-0.5),y );
-        Cell rightWall = new Cell((float) (x+0.5),y );
+        Cell leftWall = new Cell((float) (x - 0.5), y);
+        Cell rightWall = new Cell((float) (x + 0.5), y);
 
         upperWall.setCellType(CellType.WALL);
         lowerWall.setCellType(CellType.WALL);
@@ -64,7 +64,7 @@ public class Cell {
         return Walls;
     }
 
-    public void setWalls(ArrayList<Cell> cellWalls){
+    public void setWalls(ArrayList<Cell> cellWalls) {
         this.walls = cellWalls;
     }
 
@@ -77,7 +77,7 @@ public class Cell {
         return cellType;
     }
 
-    public void setCellType(CellType cellType){
+    public void setCellType(CellType cellType) {
         this.cellType = cellType;
     }
 
@@ -86,13 +86,13 @@ public class Cell {
      * The removeCellWalls function removes the walls between two cells.
      * param Cell b Remove the walls between two cells
      */
-    public void removeCellWalls(Cell b){
+    public void removeCellWalls(Cell b) {
         ArrayList<Cell> wallsInCellA = this.getWalls();
         ArrayList<Cell> wallsInCellB = b.getWalls();
 
-        for(int i = 0 ; i < wallsInCellA.size(); i++ ){
-            for(int j = 0; j < wallsInCellB.size(); j++){
-                if(wallsInCellA.get(i).equals(wallsInCellB.get(j))){
+        for (int i = 0; i < wallsInCellA.size(); i++) {
+            for (int j = 0; j < wallsInCellB.size(); j++) {
+                if (wallsInCellA.get(i).equals(wallsInCellB.get(j))) {
 
                     wallsInCellA.remove(wallsInCellA.get(i));
                     wallsInCellB.remove(wallsInCellB.get(j));
@@ -103,5 +103,14 @@ public class Cell {
                 }
             }
         }
+    }
+
+//    public boolean withinBox(Cell bottomLeftCorner,Cell topRightCorner){
+//        return this.y >= bottomLeftCorner.getY() && this.y <= topRightCorner.getY() &&
+//                this.x >= bottomLeftCorner.getX() && this.x <= topRightCorner.getX();
+//    }
+//}
+    public boolean withinBox(int size){
+        return this.x <= size && this.x >= 0 && this.y <= size && this.y >= 0;
     }
 }

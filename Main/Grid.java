@@ -7,9 +7,16 @@ public class Grid {
     private final int height;
     private final int width;
 
+    public int getSize() {
+        return size;
+    }
+
+    private final int size;
+
     public Grid(int size){
         this.width = size;
         this.height = size;
+        this.size = size;
     }
 
     public ArrayList<ArrayList<Cell>> makeGrid(){
@@ -23,5 +30,13 @@ public class Grid {
                 grid.add(rows);
             }
         return grid;
+    }
+
+    public Cell bottomLeft(){
+        return new Cell(0,0);
+    }
+
+    public Cell topRight(){
+        return new Cell(width-1,height-1);
     }
 }
