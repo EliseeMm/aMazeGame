@@ -32,4 +32,30 @@ public class CellTest {
         assertFalse(gridPoint.withinBox(new Cell(10,10),new Cell(15,15)));
     }
 
+    @Test
+    public void findWalls() {
+        Cell cellA = new Cell(5,0);
+        cellA.setWalls(cellA.cellWalls());
+        assertEquals("[(5.0,0.5), (5.0,-0.5), (4.5,0.0), (5.5,0.0)]",cellA.getWalls().toString());
+
+
+    }
+
+    @Test
+    public void removeWalls(){
+        Cell cellA = new Cell(0,0);
+        Cell cellB = new Cell(1,0);
+
+        cellA.setWalls(cellA.cellWalls());
+        cellB.setWalls(cellB.cellWalls());
+
+        assertEquals("[(0.0,0.5), (0.0,-0.5), (-0.5,0.0), (0.5,0.0)]",cellA.getWalls().toString());
+        assertEquals("[(1.0,0.5), (1.0,-0.5), (0.5,0.0), (1.5,0.0)]",cellB.getWalls().toString());
+
+        cellA.removeCellWalls(cellB);
+
+        assertEquals("[(0.0,0.5), (0.0,-0.5), (-0.5,0.0)]",cellA.getWalls().toString());
+        assertEquals("[(1.0,0.5), (1.0,-0.5), (1.5,0.0)]",cellB.getWalls().toString());
+    }
+
 }
