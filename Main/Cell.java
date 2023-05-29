@@ -40,11 +40,10 @@ public class Cell {
         if (o == this){
             return true;
         }
-        if (!(o instanceof Cell)){
+        if (!(o instanceof Cell gridPoint)){
             return  false;
         }
 
-        Cell gridPoint = (Cell) o;
         return gridPoint.getX() == this.getX() && gridPoint.getY() == this.getY();
     }
 
@@ -52,6 +51,8 @@ public class Cell {
         return this.y >= bottomLeftCorner.getY() && this.y <= topRightCorner.getY() &&
                 this.x >= bottomLeftCorner.getX() && this.x <= topRightCorner.getX();
     }
+
+
 
 
 
