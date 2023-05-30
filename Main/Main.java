@@ -11,20 +11,5 @@ public class Main {
         DepthFirstSearchMaze dfs = new DepthFirstSearchMaze(grid);
         dfs.depthFirstSearch();
 
-//        for (ArrayList<Cell> row: grids){
-//            System.out.println(row);
-//        }
-//        for (ArrayList<Cell> row: grids){
-//            for(Cell cell : row){
-//                cell.setWalls(cell.cellWalls());
-//            }
-//        }
-//
-//        for (ArrayList<Cell> row: grids){
-//            for(Cell cell : row){
-//                System.out.println(cell.getWalls());
-//            }
-//            System.out.println();
-//        }
     }
 }

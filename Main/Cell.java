@@ -6,12 +6,13 @@ public class Cell {
     private final float x;
     private final float y;
     private CellType cellType;
-    private ArrayList<Cell> walls = new ArrayList<>();
+    private ArrayList<Wall> walls = new ArrayList<>();
 
     public Cell(float x, float y) {
         this.x = x;
         this.y = y;
         this.cellType = CellType.CELL;
+        this.walls = cellWalls();
     }
 
     public float getX() {
@@ -44,17 +45,12 @@ public class Cell {
                 this.x >= bottomLeftCorner.getX() && this.x <= topRightCorner.getX();
     }
 
-    public ArrayList<Cell> cellWalls() {
-        ArrayList<Cell> Walls = new ArrayList<>();
-        Cell upperWall = new Cell(x, (float) (y + 0.5));
-        Cell lowerWall = new Cell(x, (float) (y - 0.5));
-        Cell leftWall = new Cell((float) (x - 0.5), y);
-        Cell rightWall = new Cell((float) (x + 0.5), y);
-
-        upperWall.setCellType(CellType.WALL);
-        lowerWall.setCellType(CellType.WALL);
-        leftWall.setCellType(CellType.WALL);
-        rightWall.setCellType(CellType.WALL);
+    public ArrayList<Wall> cellWalls() {
+        ArrayList<Wall> Walls = new ArrayList<>();
+        Wall upperWall = new Wall(x, (float) (y + 0.5));
+        Wall lowerWall = new Wall(x, (float) (y - 0.5));
+        Wall leftWall = new Wall((float) (x - 0.5), y);
+        Wall rightWall = new Wall((float) (x + 0.5), y);
 
 
         Walls.add(upperWall);
@@ -64,11 +60,11 @@ public class Cell {
         return Walls;
     }
 
-    public void setWalls(ArrayList<Cell> cellWalls) {
+    public void setWalls(ArrayList<Wall> cellWalls) {
         this.walls = cellWalls;
     }
 
-    public ArrayList<Cell> getWalls() {
+    public ArrayList<Wall> getWalls() {
         return this.walls;
     }
 
@@ -87,8 +83,8 @@ public class Cell {
      * param Cell b Remove the walls between two cells
      */
     public void removeCellWalls(Cell b) {
-        ArrayList<Cell> wallsInCellA = this.getWalls();
-        ArrayList<Cell> wallsInCellB = b.getWalls();
+        ArrayList<Wall> wallsInCellA = this.getWalls();
+        ArrayList<Wall> wallsInCellB = b.getWalls();
 
         for (int i = 0; i < wallsInCellA.size(); i++) {
             for (int j = 0; j < wallsInCellB.size(); j++) {
@@ -111,6 +107,6 @@ public class Cell {
 //    }
 //}
     public boolean withinBox(int size){
-        return this.x <= size && this.x >= 0 && this.y <= size && this.y >= 0;
+        return this.x < size && this.x >= 0 && this.y < size && this.y >= 0;
     }
 }

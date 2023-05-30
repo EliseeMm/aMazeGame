@@ -28,20 +28,18 @@ public class DepthFirstSearchMaze {
 
         while (!stackGridPoints.empty()){
             Cell current = stackGridPoints.pop();
-
             System.out.println(current);
+            visited.add(current);
 
 
             List<Cell> neighbors = findNeighbors(current);
-            System.out.println("neighbors "+neighbors);
+
 
             if (neighbors.size() > 0) {
                 int randomNeighborIndex = random.nextInt(neighbors.size());
                 Cell neighbor = neighbors.get(randomNeighborIndex);
                 System.out.println("selected neigh"+neighbor);
-                neighbor.setWalls(neighbor.cellWalls());
 
-                System.out.println(neighbor.getWalls());
                 current.removeCellWalls(neighbor);
                 stackGridPoints.push(neighbor);
                 visited.add(neighbor);
@@ -50,22 +48,31 @@ public class DepthFirstSearchMaze {
         }
         for (ArrayList<Cell> row: gridPoints) {
             for (Cell cell : row) {
-                System.out.println(cell.getWalls());
+                System.out.println(cell.toString() + cell.getWalls());
             }
         }
     }
 
     public ArrayList<Cell> findNeighbors(Cell gridPoint){
+
+
         ArrayList<Cell> neighbors = new ArrayList<>();
+
         Cell northPoint = new Cell(gridPoint.getX(),gridPoint.getY()+1);
         Cell southPoint = new Cell(gridPoint.getX(),gridPoint.getY()-1);
         Cell eastPoint = new Cell(gridPoint.getX() + 1,gridPoint.getY());
         Cell westPoint = new Cell(gridPoint.getX() - 1,gridPoint.getY());
-        neighbors.add(northPoint);
-        neighbors.add(southPoint);
-        neighbors.add(eastPoint);
-        neighbors.add(westPoint);
-        neighbors.removeIf(neighbor -> visited.contains(neighbor) || !neighbor.withinBox(mazeOfMazeBlocks.getSize()));
+
+        for (ArrayList<Cell> row: gridPoints) {
+            for (Cell cell : row) {
+                if (cell.equals(northPoint) || cell.equals(southPoint) || cell.equals(eastPoint) || cell.equals(westPoint)){
+                    if(cell.withinBox(mazeOfMazeBlocks.getSize()) && !visited.contains(cell)){
+                        neighbors.add(cell);
+                    }
+                }
+            }
+        }
+
         return neighbors;
     }
 
