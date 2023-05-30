@@ -20,42 +20,38 @@ public class DepthFirstSearchMaze {
         gridPoints = mazeOfMazeBlocks.makeGrid();
     }
 
-    public void depthFirstSearch(){
+    public ArrayList<ArrayList<Cell>> depthFirstSearch(){
         Stack<Cell> stackGridPoints = new Stack<>();
         int index = random.nextInt(gridPoints.size());
         ArrayList<Cell> startPoint = gridPoints.get(index);
-        stackGridPoints.push(startPoint.get(index));
+        Cell startingCell = startPoint.get(index);
+        stackGridPoints.push(startingCell);
+        visited.add(startingCell);
 
         while (!stackGridPoints.empty()){
             Cell current = stackGridPoints.pop();
-            System.out.println(current);
-            visited.add(current);
-
-
             List<Cell> neighbors = findNeighbors(current);
 
-
             if (neighbors.size() > 0) {
+                stackGridPoints.push(current);
                 int randomNeighborIndex = random.nextInt(neighbors.size());
                 Cell neighbor = neighbors.get(randomNeighborIndex);
-                System.out.println("selected neigh"+neighbor);
-
                 current.removeCellWalls(neighbor);
+
                 stackGridPoints.push(neighbor);
                 visited.add(neighbor);
-                System.out.println();
             }
         }
-        for (ArrayList<Cell> row: gridPoints) {
-            for (Cell cell : row) {
-                System.out.println(cell.toString() + cell.getWalls());
-            }
-        }
+//        System.out.println(visited);
+//        for (ArrayList<Cell> row: gridPoints) {
+//            for (Cell cell : row) {
+//                System.out.println(cell.toString() + cell.getWalls());
+//            }
+//        }
+        return gridPoints;
     }
 
     public ArrayList<Cell> findNeighbors(Cell gridPoint){
-
-
         ArrayList<Cell> neighbors = new ArrayList<>();
 
         Cell northPoint = new Cell(gridPoint.getX(),gridPoint.getY()+1);
@@ -72,7 +68,6 @@ public class DepthFirstSearchMaze {
                 }
             }
         }
-
         return neighbors;
     }
 

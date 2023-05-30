@@ -87,18 +87,18 @@ public class Cell {
         ArrayList<Wall> wallsInCellB = b.getWalls();
 
         for (int i = 0; i < wallsInCellA.size(); i++) {
-            for (int j = 0; j < wallsInCellB.size(); j++) {
-                if (wallsInCellA.get(i).equals(wallsInCellB.get(j))) {
 
-                    wallsInCellA.remove(wallsInCellA.get(i));
-                    wallsInCellB.remove(wallsInCellB.get(j));
+                if (wallsInCellB.contains(wallsInCellA.get(i))) {
+
+                    Wall cell = wallsInCellA.get(i);
+                    wallsInCellA.remove(cell);
+                    wallsInCellB.remove(cell);
 
                     this.setWalls(wallsInCellA);
                     b.setWalls(wallsInCellB);
 
                 }
             }
-        }
     }
 
 //    public boolean withinBox(Cell bottomLeftCorner,Cell topRightCorner){
