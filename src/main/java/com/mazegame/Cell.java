@@ -52,6 +52,10 @@ public class Cell {
         Wall leftWall = new Wall((float) (x - 0.5), y);
         Wall rightWall = new Wall((float) (x + 0.5), y);
 
+        upperWall.setWallPosition(WallPosition.TOP);
+        lowerWall.setWallPosition(WallPosition.BOTTOM);
+        leftWall.setWallPosition(WallPosition.LEFT);
+        rightWall.setWallPosition(WallPosition.RIGHT);
 
         Walls.add(upperWall);
         Walls.add(lowerWall);
