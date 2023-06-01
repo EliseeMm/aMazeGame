@@ -8,10 +8,12 @@ import java.util.Random;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -83,9 +85,20 @@ public class Main extends Application {
             }
             Cell cell = getRunnerStartingCell(grids);
             int[] centre = findCellCentre(cell,100);
-            Runner runner = new Runner(centre[0],centre[1],Color.RED,100);
+            Runner runner = new Runner(centre[0],centre[1],Color.SEAGREEN,100);
             root.getChildren().add(runner);
             Scene scene = new Scene(root, 1000, 1000);
+            scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent keyEvent) {
+                    switch (keyEvent.getCode()){
+                        case A -> runner.moveLeft();
+                        case D -> runner.moveRight();
+                        case S -> runner.moveDown();
+                        case W -> runner.moveUp();
+                    }
+                }
+            });
             stage.setScene(scene);
             stage.setTitle("MAZE GAME");
             stage.show();
@@ -106,16 +119,34 @@ public class Main extends Application {
             setTranslateY(startingY);
         }
 
+        void moveUp(){
+            setTranslateY(getTranslateY() - 100);
+        }
+        void moveDown(){
+            setTranslateY(getTranslateY() + 100);
+        }
+        void moveRight(){
+            setTranslateX(getTranslateX() + 100);
+        }
+        void moveLeft(){
+            setTranslateX(getTranslateX() - 100);
+        }
+
+
     }
 
     public Cell getRunnerStartingCell(ArrayList<ArrayList<Cell>> grid){
         Random random = new Random();
 
         int rowIndex = random.nextInt(grid.size());
+        System.out.println(grid.size());
+        System.out.println(rowIndex);
 
         ArrayList<Cell> row = grid.get(rowIndex);
 
         int cellIndex = random.nextInt(row.size());
+
+
 
 
         return row.get(cellIndex);
@@ -123,6 +154,8 @@ public class Main extends Application {
 
 
     public int[] findCellCentre(Cell cell, int size){
+
+
 
         int xCentre = (int) ((cell.getX() + size)/3);
         int yCentre = (int) ((cell.getY() + size)/3);
