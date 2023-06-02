@@ -3,7 +3,6 @@ package com.mazegame;
 import com.mazegame.Algorithms.DepthFirstSearchMaze;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Random;
 
 import javafx.application.Application;
@@ -29,6 +28,7 @@ public class Main extends Application {
         try {
             int offset = 0;
             int offsetY = 0;
+            int obstacleSize = 100;
             Grid grid = new Grid(10);
             ArrayList<ArrayList<Cell>> grids = grid.makeGrid();
             DepthFirstSearchMaze dfs = new DepthFirstSearchMaze(grid);
@@ -39,8 +39,8 @@ public class Main extends Application {
                     Rectangle rectangle = new Rectangle();
                     rectangle.setX(cell.getX() + offset);
                     rectangle.setY(cell.getY() + offsetY);
-                    rectangle.setHeight(100);
-                    rectangle.setWidth(100);
+                    rectangle.setHeight(obstacleSize);
+                    rectangle.setWidth(obstacleSize);
                     root.getChildren().add(rectangle);
                     for (Wall wall : cell.getWalls()) {
 
@@ -49,26 +49,26 @@ public class Main extends Application {
                             case TOP -> {
                                 line.setStartX(wall.x()+offset);
                                 line.setStartY(wall.y() - 0.5 + offsetY);
-                                line.setEndX(wall.x()+100+offset);
+                                line.setEndX(wall.x()+obstacleSize+offset);
                                 line.setEndY(wall.y() - 0.5 + offsetY);
                             }
                             case BOTTOM -> {
                                 line.setStartX(wall.x()+offset);
                                 line.setStartY(wall.y() + 0.5+100+ offsetY);
-                                line.setEndX(wall.x()+100+offset);
+                                line.setEndX(wall.x()+obstacleSize+offset);
                                 line.setEndY(wall.y() + 0.5+100+ offsetY);
                             }
                             case LEFT -> {
                                 line.setStartX(wall.x() + 0.5 +offset);
                                 line.setStartY(wall.y()+ offsetY);
                                 line.setEndX(wall.x() + 0.5+offset);
-                                line.setEndY(wall.y() +100+ offsetY);
+                                line.setEndY(wall.y() +obstacleSize+ offsetY);
                             }
                             case RIGHT -> {
-                                line.setStartX(wall.x() - 0.5+100+offset);
+                                line.setStartX(wall.x() - 0.5+obstacleSize+offset);
                                 line.setStartY(wall.y()+ offsetY);
-                                line.setEndX(wall.x() - 0.5+100+offset);
-                                line.setEndY(wall.y() +100+ offsetY);
+                                line.setEndX(wall.x() - 0.5+obstacleSize+offset);
+                                line.setEndY(wall.y() +obstacleSize+ offsetY);
                             }
                         }
                         line.setStyle("-fx-stroke: red;");
@@ -80,8 +80,8 @@ public class Main extends Application {
                 offset = 0;
             }
             Cell cell = getRunnerStartingCell(grids);
-            int[] centre = findCellCentre(cell,100);
-            Runner runner = new Runner(centre[0],centre[1],Color.SEAGREEN,100);
+            int[] centre = findCellCentre(cell,obstacleSize);
+            Runner runner = new Runner(centre[0],centre[1],Color.SEAGREEN,obstacleSize);
             root.getChildren().add(runner);
             Scene scene = new Scene(root, 1000, 1000);
             scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -113,21 +113,14 @@ public class Main extends Application {
         ArrayList<Cell> row = grid.get(rowIndex);
 
         int cellIndex = random.nextInt(row.size());
-
-
-
-
         return row.get(cellIndex);
     }
 
-
     public int[] findCellCentre(Cell cell, int size){
-
-
-
         int xCentre = (int) ((cell.getX() + size)/3);
         int yCentre = (int) ((cell.getY() + size)/3);
         return new int[]{xCentre,yCentre};
 
     }
+
 }

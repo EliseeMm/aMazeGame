@@ -105,11 +105,6 @@ public class Cell {
             }
     }
 
-//    public boolean withinBox(Cell bottomLeftCorner,Cell topRightCorner){
-//        return this.y >= bottomLeftCorner.getY() && this.y <= topRightCorner.getY() &&
-//                this.x >= bottomLeftCorner.getX() && this.x <= topRightCorner.getX();
-//    }
-//}
     public boolean withinBox(int size){
         return this.x < size && this.x >= 0 && this.y < size && this.y >= 0;
     }
