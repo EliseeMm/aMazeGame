@@ -32,6 +32,7 @@ public class Main extends Application {
             Grid grid = new Grid(10);
             ArrayList<ArrayList<Cell>> grids = grid.makeGrid();
             DepthFirstSearchMaze dfs = new DepthFirstSearchMaze(grid);
+            ArrayList<Line> lines =  new ArrayList<>();
             ArrayList<ArrayList<Cell>> maze = dfs.depthFirstSearch();
             Group root = new Group();
             for (ArrayList<Cell> row : maze) {
@@ -71,6 +72,7 @@ public class Main extends Application {
                                 line.setEndY(wall.y() +obstacleSize+ offsetY);
                             }
                         }
+                        lines.add(line);
                         line.setStyle("-fx-stroke: red;");
                         root.getChildren().add(line);
                     }
@@ -87,11 +89,28 @@ public class Main extends Application {
             scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
                 @Override
                 public void handle(KeyEvent keyEvent) {
+
                     switch (keyEvent.getCode()){
-                        case A -> runner.moveLeft();
-                        case D -> runner.moveRight();
-                        case S -> runner.moveDown();
-                        case W -> runner.moveUp();
+                        case A -> {
+                            if (linesDoNotIntersect(runner, lines, -100, 0)){
+                                runner.moveLeft();
+                            }
+                        }
+                        case D -> {
+                            if (linesDoNotIntersect(runner, lines, 100, 0)){
+                                runner.moveRight();
+                            }
+                        }
+                        case S -> {
+                            if (linesDoNotIntersect(runner, lines, 0, +100)){
+                                runner.moveDown();
+                            }
+                        }
+                        case W -> {
+                            if (linesDoNotIntersect(runner, lines, 0, -100)){
+                                runner.moveUp();
+                            }
+                        }
                     }
                 }
             });
@@ -122,5 +141,22 @@ public class Main extends Application {
         return new int[]{xCentre,yCentre};
 
     }
+
+
+    public boolean linesDoNotIntersect(Runner runner, ArrayList<Line> lines, int translateX, int translateY){
+        Line runnerLine = new Line();
+        runnerLine.setStartX(runner.getTranslateX());
+        runnerLine.setStartY(runner.getTranslateY());
+        runnerLine.setEndX(runner.getTranslateX() + translateX);
+        runnerLine.setEndY(runner.getTranslateY() + translateY);
+        for (Line line : lines){
+            if(runnerLine.getBoundsInParent().intersects(line.getBoundsInParent())){
+                return false;
+            }
+        }
+        return true;
+
+    }
+
 
 }
