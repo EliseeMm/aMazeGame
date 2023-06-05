@@ -1,10 +1,7 @@
 package com.mazegame;
 
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-
-import java.util.ArrayList;
 
 public class Runner extends Rectangle {
     protected Runner(int startingX, int startingY, Color color, int obstacleSize){

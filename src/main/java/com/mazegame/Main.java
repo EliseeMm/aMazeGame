@@ -1,7 +1,6 @@
 package com.mazegame;
 
 import com.mazegame.Algorithms.DepthFirstSearchMaze;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -24,13 +23,12 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage){
         try {
             int offset = 0;
             int offsetY = 0;
             int obstacleSize = 100;
             Grid grid = new Grid(10);
-            ArrayList<ArrayList<Cell>> grids = grid.makeGrid();
             DepthFirstSearchMaze dfs = new DepthFirstSearchMaze(grid);
             ArrayList<Line> lines =  new ArrayList<>();
             ArrayList<Rectangle> cells = new ArrayList<>();
@@ -84,7 +82,7 @@ public class Main extends Application {
                 offset = 0;
             }
             Rectangle selectedRectangle = getRunnerStartingCell(cells);
-            Cell rectangleCentre = findCellCentre(selectedRectangle,obstacleSize);
+            Cell rectangleCentre = findCellCentre(selectedRectangle);
             Runner runner = new Runner((int) rectangleCentre.getX(), (int) rectangleCentre.getY(),Color.SEAGREEN,obstacleSize);
             root.getChildren().add(runner);
             Scene scene = new Scene(root, 1000, 1000);
@@ -132,7 +130,7 @@ public class Main extends Application {
         return cells.get(rectangleIndex);
     }
 
-    public Cell findCellCentre(Rectangle rectangle, int size){
+    public Cell findCellCentre(Rectangle rectangle){
         float x = (float) rectangle.getX();
         float y = (float) rectangle.getY();
         return new Cell(x+33,y+33);
