@@ -33,6 +33,7 @@ public class Main extends Application {
             ArrayList<ArrayList<Cell>> grids = grid.makeGrid();
             DepthFirstSearchMaze dfs = new DepthFirstSearchMaze(grid);
             ArrayList<Line> lines =  new ArrayList<>();
+            ArrayList<Rectangle> cells = new ArrayList<>();
             ArrayList<ArrayList<Cell>> maze = dfs.depthFirstSearch();
             Group root = new Group();
             for (ArrayList<Cell> row : maze) {
@@ -42,6 +43,7 @@ public class Main extends Application {
                     rectangle.setY(cell.getY() + offsetY);
                     rectangle.setHeight(obstacleSize);
                     rectangle.setWidth(obstacleSize);
+                    cells.add(rectangle);
                     root.getChildren().add(rectangle);
                     for (Wall wall : cell.getWalls()) {
 
@@ -81,9 +83,9 @@ public class Main extends Application {
                 offsetY +=99;
                 offset = 0;
             }
-            Cell cell = getRunnerStartingCell(grids);
-            int[] centre = findCellCentre(cell,obstacleSize);
-            Runner runner = new Runner(centre[0],centre[1],Color.SEAGREEN,obstacleSize);
+            Rectangle selectedRectangle = getRunnerStartingCell(cells);
+            Cell rectangleCentre = findCellCentre(selectedRectangle,obstacleSize);
+            Runner runner = new Runner((int) rectangleCentre.getX(), (int) rectangleCentre.getY(),Color.SEAGREEN,obstacleSize);
             root.getChildren().add(runner);
             Scene scene = new Scene(root, 1000, 1000);
             scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -124,22 +126,16 @@ public class Main extends Application {
     }
 
 
-    public Cell getRunnerStartingCell(ArrayList<ArrayList<Cell>> grid){
+    public Rectangle getRunnerStartingCell(ArrayList<Rectangle> cells){
         Random random = new Random();
-
-        int rowIndex = random.nextInt(grid.size());
-
-        ArrayList<Cell> row = grid.get(rowIndex);
-
-        int cellIndex = random.nextInt(row.size());
-        return row.get(cellIndex);
+        int rectangleIndex = random.nextInt(cells.size());
+        return cells.get(rectangleIndex);
     }
 
-    public int[] findCellCentre(Cell cell, int size){
-        int xCentre = (int) ((cell.getX() + size)/3);
-        int yCentre = (int) ((cell.getY() + size)/3);
-        return new int[]{xCentre,yCentre};
-
+    public Cell findCellCentre(Rectangle rectangle, int size){
+        float x = (float) rectangle.getX();
+        float y = (float) rectangle.getY();
+        return new Cell(x+33,y+33);
     }
 
 
@@ -155,7 +151,6 @@ public class Main extends Application {
             }
         }
         return true;
-
     }
 
 

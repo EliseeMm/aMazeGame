@@ -16,16 +16,16 @@ public class Runner extends Rectangle {
     }
 
     void moveUp(){
-        setTranslateY(getTranslateY() - 100);
+        setTranslateY(getTranslateY() - 99);
     }
     void moveDown(){
-        setTranslateY(getTranslateY() + 100);
+        setTranslateY(getTranslateY() + 99);
     }
     void moveRight(){
-        setTranslateX(getTranslateX() + 100);
+        setTranslateX(getTranslateX() + 99);
     }
     void moveLeft(){
-        setTranslateX(getTranslateX() - 100);
+        setTranslateX(getTranslateX() - 99);
     }
 
 
