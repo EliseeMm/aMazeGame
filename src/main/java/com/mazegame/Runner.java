@@ -4,8 +4,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Runner extends Rectangle {
+    int obstacleSize;
     protected Runner(int startingX, int startingY, Color color, int obstacleSize){
         super(startingX,startingY,color);
+        this.obstacleSize = obstacleSize;
         setWidth((double) obstacleSize /3);
         setHeight((double) obstacleSize /3);
         setTranslateX(startingX);
@@ -13,16 +15,16 @@ public class Runner extends Rectangle {
     }
 
     void moveUp(){
-        setTranslateY(getTranslateY() - 99);
+        setTranslateY(getTranslateY() - (obstacleSize-1));
     }
     void moveDown(){
-        setTranslateY(getTranslateY() + 99);
+        setTranslateY(getTranslateY() + (obstacleSize-1));
     }
     void moveRight(){
-        setTranslateX(getTranslateX() + 99);
+        setTranslateX(getTranslateX() + (obstacleSize-1));
     }
     void moveLeft(){
-        setTranslateX(getTranslateX() - 99);
+        setTranslateX(getTranslateX() - (obstacleSize-1));
     }
 
 

@@ -55,9 +55,9 @@ public class Main extends Application {
                             }
                             case BOTTOM -> {
                                 line.setStartX(wall.x()+offset);
-                                line.setStartY(wall.y() + 0.5+100+ offsetY);
+                                line.setStartY(wall.y() + 0.5+obstacleSize+ offsetY);
                                 line.setEndX(wall.x()+obstacleSize+offset);
-                                line.setEndY(wall.y() + 0.5+100+ offsetY);
+                                line.setEndY(wall.y() + 0.5+obstacleSize+ offsetY);
                             }
                             case LEFT -> {
                                 line.setStartX(wall.x() + 0.5 +offset);
@@ -76,9 +76,9 @@ public class Main extends Application {
                         line.setStyle("-fx-stroke: red;");
                         root.getChildren().add(line);
                     }
-                    offset += 99;
+                    offset += (obstacleSize-1);
                 }
-                offsetY +=99;
+                offsetY += (obstacleSize-1);
                 offset = 0;
             }
             Rectangle selectedRectangle = getRunnerStartingCell(cells);
@@ -92,22 +92,22 @@ public class Main extends Application {
 
                     switch (keyEvent.getCode()){
                         case A -> {
-                            if (linesDoNotIntersect(runner, lines, -100, 0)){
+                            if (linesDoNotIntersect(runner, lines, -obstacleSize, 0)){
                                 runner.moveLeft();
                             }
                         }
                         case D -> {
-                            if (linesDoNotIntersect(runner, lines, 100, 0)){
+                            if (linesDoNotIntersect(runner, lines, obstacleSize, 0)){
                                 runner.moveRight();
                             }
                         }
                         case S -> {
-                            if (linesDoNotIntersect(runner, lines, 0, +100)){
+                            if (linesDoNotIntersect(runner, lines, 0, +obstacleSize)){
                                 runner.moveDown();
                             }
                         }
                         case W -> {
-                            if (linesDoNotIntersect(runner, lines, 0, -100)){
+                            if (linesDoNotIntersect(runner, lines, 0, -obstacleSize)){
                                 runner.moveUp();
                             }
                         }
