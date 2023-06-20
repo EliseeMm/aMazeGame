@@ -27,8 +27,9 @@ public class Main extends Application {
         try {
             int offset = 0;
             int offsetY = 0;
-            int obstacleSize = 100;
-            Grid grid = new Grid(10);
+            int obstacleSize = 60;
+            Rectangle endPoint;
+            Grid grid = new Grid(12);
             DepthFirstSearchMaze dfs = new DepthFirstSearchMaze(grid);
             ArrayList<Line> lines =  new ArrayList<>();
             ArrayList<Rectangle> cells = new ArrayList<>();
@@ -41,6 +42,10 @@ public class Main extends Application {
                     rectangle.setY(cell.getY() + offsetY);
                     rectangle.setHeight(obstacleSize);
                     rectangle.setWidth(obstacleSize);
+                    if(cell.getCellType().equals(CellType.END)){
+                        rectangle.setFill(Color.DARKCYAN);
+                        endPoint = rectangle;
+                    }
                     cells.add(rectangle);
                     root.getChildren().add(rectangle);
                     for (Wall wall : cell.getWalls()) {
@@ -82,10 +87,12 @@ public class Main extends Application {
                 offset = 0;
             }
             Rectangle selectedRectangle = getRunnerStartingCell(cells);
-            Cell rectangleCentre = findCellCentre(selectedRectangle);
+            Cell rectangleCentre = findCellCentre(selectedRectangle,obstacleSize);
             Runner runner = new Runner((int) rectangleCentre.getX(), (int) rectangleCentre.getY(),Color.SEAGREEN,obstacleSize);
             root.getChildren().add(runner);
             Scene scene = new Scene(root, 1000, 1000);
+
+
             scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
                 @Override
                 public void handle(KeyEvent keyEvent) {
@@ -112,6 +119,8 @@ public class Main extends Application {
                             }
                         }
                     }
+                    System.out.println(runner.getTranslateX());
+                    System.out.println(runner.getTranslateY());
                 }
             });
             stage.setScene(scene);
@@ -130,10 +139,10 @@ public class Main extends Application {
         return cells.get(rectangleIndex);
     }
 
-    public Cell findCellCentre(Rectangle rectangle){
+    public Cell findCellCentre(Rectangle rectangle,int obstacleSize){
         float x = (float) rectangle.getX();
         float y = (float) rectangle.getY();
-        return new Cell(x+33,y+33);
+        return new Cell(x+20,y+20);
     }
 
 

@@ -1,6 +1,7 @@
 package com.mazegame.Algorithms;
 
 import com.mazegame.Cell;
+import com.mazegame.CellType;
 import com.mazegame.Grid;
 
 
@@ -18,6 +19,7 @@ public class DepthFirstSearchMaze {
     public DepthFirstSearchMaze(Grid grid){
         this.mazeOfMazeBlocks = grid;
         gridPoints = mazeOfMazeBlocks.makeGrid();
+        findEndPoint(gridPoints);
     }
 
     public ArrayList<ArrayList<Cell>> depthFirstSearch(){
@@ -68,6 +70,19 @@ public class DepthFirstSearchMaze {
             }
         }
         return neighbors;
+    }
+
+    public void findEndPoint(ArrayList<ArrayList<Cell>> grid){
+        Cell[] corners = {new Cell(0,0),new Cell(0,12),new Cell(12,12),new Cell(12,0)};
+        int randomCell = random.nextInt(corners.length);
+        Cell endpoint = corners[randomCell];
+
+        int rowIndex = random.nextInt(grid.size());
+        int cellIndex = random.nextInt(grid.get(rowIndex).size());
+        Cell endPoint = grid.get(rowIndex).get(cellIndex);
+        endPoint.setCellType(CellType.END);
+
+
     }
 
 }
