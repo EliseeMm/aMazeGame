@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
+    private Rectangle endPoint;
     public static void main(String[] args) {
         launch();
 
@@ -28,7 +29,7 @@ public class Main extends Application {
             int offset = 0;
             int offsetY = 0;
             int obstacleSize = 60;
-            Rectangle endPoint;
+//            Rectangle endPoint;
             Grid grid = new Grid(12);
             DepthFirstSearchMaze dfs = new DepthFirstSearchMaze(grid);
             ArrayList<Line> lines =  new ArrayList<>();
@@ -119,8 +120,7 @@ public class Main extends Application {
                             }
                         }
                     }
-                    System.out.println(runner.getTranslateX());
-                    System.out.println(runner.getTranslateY());
+                    System.out.println(robotInEndPoint(runner,endPoint));
                 }
             });
             stage.setScene(scene);
@@ -158,6 +158,12 @@ public class Main extends Application {
             }
         }
         return true;
+    }
+    public boolean robotInEndPoint(Runner runner, Rectangle rectangle){
+        Cell runnerCell = new Cell((float) runner.getTranslateX(), (float) runner.getTranslateY());
+        Cell rectangleTopLeft = new Cell((float) rectangle.getX(),(float) rectangle.getY());
+        Cell rectangleBottomRight = new Cell((float) ((float) rectangle.getX() + rectangle.getHeight()), (float) ((float) rectangle.getY() + rectangle.getHeight()));
+        return  runnerCell.withinTwoPoints(rectangleTopLeft,rectangleBottomRight);
     }
 
 

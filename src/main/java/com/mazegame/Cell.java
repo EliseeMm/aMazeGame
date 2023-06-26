@@ -108,4 +108,8 @@ public class Cell {
     public boolean withinBox(int size){
         return this.x < size && this.x >= 0 && this.y < size && this.y >= 0;
     }
+
+    public boolean withinTwoPoints(Cell cellA,Cell cellB){
+        return  this.x > cellA.getX() && this.x < cellB.getX() && this.y  > cellA.getY() && this.y < cellB.getY();
+    }
 }
