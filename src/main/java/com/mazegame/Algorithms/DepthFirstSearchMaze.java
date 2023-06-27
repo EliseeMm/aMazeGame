@@ -43,12 +43,6 @@ public class DepthFirstSearchMaze {
                 visited.add(neighbor);
             }
         }
-//        System.out.println(visited);
-//        for (ArrayList<Cell> row: gridPoints) {
-//            for (Cell cell : row) {
-//                System.out.println(cell.toString() + cell.getWalls());
-//            }
-//        }
         return gridPoints;
     }
 

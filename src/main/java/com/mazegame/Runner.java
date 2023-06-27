@@ -8,8 +8,8 @@ public class Runner extends Rectangle {
     protected Runner(int startingX, int startingY, Color color, int obstacleSize){
         super(startingX,startingY,color);
         this.obstacleSize = obstacleSize;
-        setWidth(obstacleSize/3);
-        setHeight(obstacleSize/3);
+        setWidth((double) obstacleSize /3);
+        setHeight((double) obstacleSize /3);
         setTranslateX(startingX);
         setTranslateY(startingY);
     }

@@ -32,11 +32,4 @@ public class Grid {
         return grid;
     }
 
-    public Cell bottomLeft(){
-        return new Cell(0,0);
-    }
-
-    public Cell topRight(){
-        return new Cell(width-1,height-1);
-    }
 }

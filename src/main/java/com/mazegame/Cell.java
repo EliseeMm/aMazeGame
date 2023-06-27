@@ -6,7 +6,7 @@ public class Cell {
     private final float x;
     private final float y;
     private CellType cellType;
-    private ArrayList<Wall> walls = new ArrayList<>();
+    private ArrayList<Wall> walls;
 
     public Cell(float x, float y) {
         this.x = x;
