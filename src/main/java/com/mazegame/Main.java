@@ -3,7 +3,6 @@ package com.mazegame;
 import com.mazegame.Algorithms.DepthFirstSearchMaze;
 import java.util.ArrayList;
 import java.util.Random;
-
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -15,8 +14,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+
 
 
 public class Main extends Application {
@@ -26,6 +26,9 @@ public class Main extends Application {
     private Scene scene2;
     private Scene scene1;
     private Scene scene;
+    private Text text;
+    private ScoreBoard scoreBoard;
+    private int score = 0;
     public static void main(String[] args) {
         launch();
 
@@ -33,6 +36,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage){
+        scoreBoard = new ScoreBoard();
         mazeStage = stage;
         scene1 = createMazeScene();
         scene2 = secondScene();
@@ -44,14 +48,19 @@ public class Main extends Application {
 
     public Rectangle getRunnerStartingCell(ArrayList<Rectangle> cells){
         Random random = new Random();
-        int rectangleIndex = random.nextInt(cells.size());
-        return cells.get(rectangleIndex);
+        while (true) {
+            int rectangleIndex = random.nextInt(cells.size());
+            Color rectangleColor = (Color) cells.get(rectangleIndex).getFill();
+            if (!rectangleColor.equals(Color.DARKCYAN)) {
+                return cells.get(rectangleIndex);
+            }
+        }
     }
 
     public Cell findCellCentre(Rectangle rectangle,int obstacleSize){
         float x = (float) rectangle.getX();
         float y = (float) rectangle.getY();
-        return new Cell(x+20,y+20);
+        return new Cell(x+((float) obstacleSize /3),y+((float) obstacleSize /3));
     }
 
 
@@ -77,17 +86,16 @@ public class Main extends Application {
 
     private Scene createMazeScene() {
         try {
-            ;
-            int offset = 0;
-            int offsetY = 0;
+            int offset = 150;
+            int offsetY = 100;
             int obstacleSize = 60;
-//            Rectangle endPoint;
             Grid grid = new Grid(12);
             DepthFirstSearchMaze dfs = new DepthFirstSearchMaze(grid);
             ArrayList<Line> lines = new ArrayList<>();
             ArrayList<Rectangle> cells = new ArrayList<>();
             ArrayList<ArrayList<Cell>> maze = dfs.depthFirstSearch();
             Group root = new Group();
+
             for (ArrayList<Cell> row : maze) {
                 for (Cell cell : row) {
                     Rectangle rectangle = new Rectangle();
@@ -137,12 +145,14 @@ public class Main extends Application {
                     offset += (obstacleSize - 1);
                 }
                 offsetY += (obstacleSize - 1);
-                offset = 0;
+                offset = 150;
             }
             Rectangle selectedRectangle = getRunnerStartingCell(cells);
             Cell rectangleCentre = findCellCentre(selectedRectangle, obstacleSize);
             Runner runner = new Runner((int) rectangleCentre.getX(), (int) rectangleCentre.getY(), Color.SEAGREEN, obstacleSize);
+            text = scoreBoard.scoreBoard(score);
             root.getChildren().add(runner);
+            root.getChildren().add(text);
             scene = new Scene(root, 1000, 1000);
 
 
@@ -172,6 +182,7 @@ public class Main extends Application {
                         }
                     }
                     if (robotInEndPoint(runner, endPoint)) {
+                        score +=1;
                         switchScene(createMazeScene());
                         mazeStage.show();
 
