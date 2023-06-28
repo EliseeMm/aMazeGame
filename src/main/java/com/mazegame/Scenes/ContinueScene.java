@@ -1,4 +1,4 @@
-package com.mazegame;
+package com.mazegame.Scenes;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

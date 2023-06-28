@@ -1,6 +1,7 @@
 package com.mazegame;
 
 
+import com.mazegame.Scenes.MazeScene;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

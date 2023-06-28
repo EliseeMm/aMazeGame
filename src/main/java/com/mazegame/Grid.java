@@ -1,5 +1,7 @@
 package com.mazegame;
 
+import com.mazegame.CellsAndWalls.Cell;
+
 import java.util.ArrayList;
 
 

@@ -1,6 +1,6 @@
 package src.test.test;
 
-import com.mazegame.Cell;
+import com.mazegame.CellsAndWalls.Cell;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,4 +1,4 @@
-package com.mazegame;
+package com.mazegame.CellsAndWalls;
 
 public enum WallPosition {
     TOP,

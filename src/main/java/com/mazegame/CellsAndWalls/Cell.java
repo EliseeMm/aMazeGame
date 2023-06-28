@@ -1,4 +1,4 @@
-package com.mazegame;
+package com.mazegame.CellsAndWalls;
 
 import java.util.ArrayList;
 
@@ -7,6 +7,7 @@ public class Cell {
     private final float y;
     private CellType cellType;
     private ArrayList<Wall> walls;
+    private Cell cellID;
 
     public Cell(float x, float y) {
         this.x = x;
@@ -111,5 +112,11 @@ public class Cell {
 
     public boolean withinTwoPoints(Cell cellA,Cell cellB){
         return  this.x > cellA.getX() && this.x < cellB.getX() && this.y  > cellA.getY() && this.y < cellB.getY();
+    }
+    public void setCellID(Cell id){
+        this.cellID = id;
+    }
+    public Cell getCellID(){
+        return this.cellID;
     }
 }

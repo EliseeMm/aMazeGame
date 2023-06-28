@@ -1,7 +1,7 @@
 package src.test.test;
 
 import com.mazegame.Algorithms.DepthFirstSearchMaze;
-import com.mazegame.Cell;
+import com.mazegame.CellsAndWalls.Cell;
 import com.mazegame.Grid;
 import org.junit.jupiter.api.Test;
 

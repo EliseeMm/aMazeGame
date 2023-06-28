@@ -1,4 +1,4 @@
-package com.mazegame;
+package com.mazegame.Scenes;
 
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;

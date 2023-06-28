@@ -1,6 +1,11 @@
-package com.mazegame;
+package com.mazegame.Scenes;
 
+import com.mazegame.*;
 import com.mazegame.Algorithms.DepthFirstSearchMaze;
+import com.mazegame.Algorithms.Kruskal;
+import com.mazegame.CellsAndWalls.Cell;
+import com.mazegame.CellsAndWalls.CellType;
+import com.mazegame.CellsAndWalls.Wall;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -27,10 +32,17 @@ public class MazeScene {
             int offsetY = 100;
             int obstacleSize = 60;
             Grid grid = new Grid(12);
+
+//            Kruskal kruskal = new Kruskal(grid);
+//            ArrayList<ArrayList<Cell>> maze = kruskal.getGridPoints();
+
             DepthFirstSearchMaze dfs = new DepthFirstSearchMaze(grid);
+            ArrayList<ArrayList<Cell>> maze = dfs.depthFirstSearch();
+
+
             ArrayList<Line> lines = new ArrayList<>();
             ArrayList<Rectangle> cells = new ArrayList<>();
-            ArrayList<ArrayList<Cell>> maze = dfs.depthFirstSearch();
+
             Group root = new Group();
 
             for (ArrayList<Cell> row : maze) {
