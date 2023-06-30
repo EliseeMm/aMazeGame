@@ -23,6 +23,7 @@ public class AlgorithmSelectorScene {
         Button dfsButton = new Button("DFS");
         Button randomButton = new Button("Randomised");
 
+
         kruskalButton.setOnAction(actionEvent -> setRequestedAlgo("kruskal"));
         dfsButton.setOnAction(actionEvent -> setRequestedAlgo("dfs"));
         randomButton.setOnAction(actionEvent -> setRequestedAlgo("random"));

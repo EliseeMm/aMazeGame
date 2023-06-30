@@ -9,9 +9,9 @@ public class ScoreBoard extends Text {
     public Text scoreBoard(int score){
         Text text = new Text();
         String scoreString = Integer.toString(score);
-        text.setX(410);
-        text.setY(60);
-        text.setFont(Font.font("Verdana", FontWeight.BOLD,40));
+        text.setX(80);
+        text.setY(40);
+        text.setFont(Font.font("Verdana", FontWeight.BOLD,20));
         text.setText("Score: "+scoreString);
         text.setStroke(Color.GOLD);
         return text;

@@ -7,6 +7,7 @@ import com.mazegame.Algorithms.Kruskal;
 import com.mazegame.CellsAndWalls.Cell;
 import com.mazegame.CellsAndWalls.CellType;
 import com.mazegame.CellsAndWalls.Wall;
+import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -22,26 +23,37 @@ public class MazeScene {
     private Rectangle endPoint;
     private final ScoreBoard scoreBoard = new ScoreBoard();
     private int score = 0;
-    private Grid grid;
-    private  Stage mazeStage;
+    private final Grid grid;
+    private final Stage mazeStage;
     private String playerName;
-    private String colorWall;
     private String algo;
+    private Stage timeStage;
+    private Timeline timeline;
+    private Boolean gameOn;
     public MazeScene(Stage stage,Grid grid){
+        timeStage = new Stage();
         this.mazeStage = stage;
         this.grid = grid;
+        Timer timer = new Timer();
+        timeline = timer.start(timeStage);
+        gameOn = true;
 
     }
     public Scene createMazeScene() {
+
+        if(gameOn){
+            timeline.play();
+        }
+
         Scene scene;
         ArrayList<ArrayList<Cell>> maze;
         try {
-            int offset = 150;
-            int offsetY = 100;
-            int obstacleSize = 60;
+            int offset = 80;
+            int offsetY = 50;
+            int obstacleSize = 45;
 
+            String colorWall;
             if(this.algo.equalsIgnoreCase("kruskal")){
-
                 Kruskal kruskal = new Kruskal(grid);
                 maze = kruskal.getGridPoints();
                 colorWall = kruskal.getWallColor();
@@ -108,13 +120,13 @@ public class MazeScene {
                             }
                         }
                         lines.add(line);
-                        line.setStyle("-fx-stroke: "+colorWall+";");
+                        line.setStyle("-fx-stroke: "+ colorWall +";");
                         root.getChildren().add(line);
                     }
                     offset += (obstacleSize - 1);
                 }
                 offsetY += (obstacleSize - 1);
-                offset = 150;
+                offset = 80;
             }
             Rectangle selectedRectangle = getRunnerStartingCell(cells);
             Cell rectangleCentre = findCellCentre(selectedRectangle, obstacleSize);
@@ -122,7 +134,12 @@ public class MazeScene {
             Text text = scoreBoard.scoreBoard(score);
             root.getChildren().add(runner);
             root.getChildren().add(text);
-            scene = new Scene(root, 1000, 1000);
+            scene = new Scene(root, 700, 700);
+
+
+                timeline.setOnFinished(actionEvent -> close());
+
+
 
 
             scene.setOnKeyPressed(keyEvent -> {
@@ -201,4 +218,9 @@ public class MazeScene {
     public void setAlgo(String algo){
         this.algo = algo;
     }
+
+    public void close(){
+        System.exit(0);
+    }
+
 }
