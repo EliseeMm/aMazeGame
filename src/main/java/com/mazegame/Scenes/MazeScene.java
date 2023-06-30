@@ -1,6 +1,7 @@
 package com.mazegame.Scenes;
 
 import com.mazegame.*;
+import com.mazegame.Algorithms.Algorithms;
 import com.mazegame.Algorithms.DepthFirstSearchMaze;
 import com.mazegame.Algorithms.Kruskal;
 import com.mazegame.CellsAndWalls.Cell;
@@ -21,24 +22,43 @@ public class MazeScene {
     private Rectangle endPoint;
     private final ScoreBoard scoreBoard = new ScoreBoard();
     private int score = 0;
-    private final Stage mazeStage;
-    public MazeScene(Stage stage){
+    private Grid grid;
+    private  Stage mazeStage;
+    private String playerName;
+    private String colorWall;
+    private String algo;
+    public MazeScene(Stage stage,Grid grid){
         this.mazeStage = stage;
+        this.grid = grid;
+
     }
     public Scene createMazeScene() {
         Scene scene;
+        ArrayList<ArrayList<Cell>> maze;
         try {
             int offset = 150;
             int offsetY = 100;
             int obstacleSize = 60;
-            Grid grid = new Grid(12);
 
-//            Kruskal kruskal = new Kruskal(grid);
-//            ArrayList<ArrayList<Cell>> maze = kruskal.getGridPoints();
+            if(this.algo.equalsIgnoreCase("kruskal")){
 
-            DepthFirstSearchMaze dfs = new DepthFirstSearchMaze(grid);
-            ArrayList<ArrayList<Cell>> maze = dfs.depthFirstSearch();
+                Kruskal kruskal = new Kruskal(grid);
+                maze = kruskal.getGridPoints();
+                colorWall = kruskal.getWallColor();
+            } else if (this.algo.equalsIgnoreCase("dfs")) {
+                DepthFirstSearchMaze dfs = new DepthFirstSearchMaze(grid);
+                maze = dfs.getGridPoints();
+                colorWall = dfs.getWallColor();
 
+            }else {
+                Algorithms[] algorithms = {new Kruskal(grid),new DepthFirstSearchMaze(grid)};
+                Random random = new Random();
+                int algoIndex = random.nextInt(algorithms.length);
+
+                Algorithms randomAlgorithm = algorithms[algoIndex];
+                maze = randomAlgorithm.getGridPoints();
+                colorWall = randomAlgorithm.getWallColor();
+            }
 
             ArrayList<Line> lines = new ArrayList<>();
             ArrayList<Rectangle> cells = new ArrayList<>();
@@ -88,7 +108,7 @@ public class MazeScene {
                             }
                         }
                         lines.add(line);
-                        line.setStyle("-fx-stroke: red;");
+                        line.setStyle("-fx-stroke: "+colorWall+";");
                         root.getChildren().add(line);
                     }
                     offset += (obstacleSize - 1);
@@ -107,22 +127,22 @@ public class MazeScene {
 
             scene.setOnKeyPressed(keyEvent -> {
                 switch (keyEvent.getCode()) {
-                    case A -> {
+                    case LEFT -> {
                         if (linesDoNotIntersect(runner, lines, -obstacleSize, 0)) {
                             runner.moveLeft();
                         }
                     }
-                    case D -> {
+                    case RIGHT -> {
                         if (linesDoNotIntersect(runner, lines, obstacleSize, 0)) {
                             runner.moveRight();
                         }
                     }
-                    case S -> {
+                    case DOWN -> {
                         if (linesDoNotIntersect(runner, lines, 0, +obstacleSize)) {
                             runner.moveDown();
                         }
                     }
-                    case W -> {
+                    case UP -> {
                         if (linesDoNotIntersect(runner, lines, 0, -obstacleSize)) {
                             runner.moveUp();
                         }
@@ -177,5 +197,8 @@ public class MazeScene {
     }
     public void switchScene(Scene scene){
         mazeStage.setScene(scene);
+    }
+    public void setAlgo(String algo){
+        this.algo = algo;
     }
 }

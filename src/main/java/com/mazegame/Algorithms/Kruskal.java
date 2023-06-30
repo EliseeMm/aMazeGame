@@ -10,10 +10,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Kruskal {
+public class Kruskal implements Algorithms{
     Grid mazeOfMazeBlocks;
     ArrayList<ArrayList<Cell>> gridPoints;
     Random random = new Random();
+    private String wallColor;
 
     private static List<Wall> wallList = new ArrayList<>();
     private static List<Wall> wallsWithTwoNeighbors = new ArrayList<>();
@@ -21,6 +22,7 @@ public class Kruskal {
     public Kruskal(Grid grid){
         this.mazeOfMazeBlocks = grid;
         gridPoints = mazeOfMazeBlocks.makeGrid();
+        wallColor = "red";
         populateWalls(gridPoints);
         setCellIds(gridPoints);
         findEndPoint(gridPoints);
@@ -91,12 +93,19 @@ public class Kruskal {
 
         return adjacentCells;
     }
+    @Override
     public void findEndPoint(ArrayList<ArrayList<Cell>> grid) {
         int rowIndex = random.nextInt(grid.size());
         int cellIndex = random.nextInt(grid.get(rowIndex).size());
         Cell endPoint = grid.get(rowIndex).get(cellIndex);
         endPoint.setCellType(CellType.END);
     }
+
+    @Override
+    public String getWallColor() {
+        return wallColor;
+    }
+
     public ArrayList<ArrayList<Cell>> kruskal() {
         Collections.shuffle(wallList);
         while (!wallList.isEmpty()) {
@@ -109,5 +118,8 @@ public class Kruskal {
         }
         return gridPoints;
     }
-
+    @Override
+    public String toString(){
+        return "kruskal";
+    }
 }

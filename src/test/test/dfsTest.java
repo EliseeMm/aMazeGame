@@ -24,7 +24,7 @@ public class dfsTest {
 
         for(int i = 0;i < 1000;i++) {
             DepthFirstSearchMaze dfs = new DepthFirstSearchMaze(grid);
-            ArrayList<ArrayList<Cell>> maze = dfs.depthFirstSearch();
+            ArrayList<ArrayList<Cell>> maze = dfs.getGridPoints();
 
             for (ArrayList<Cell> row : maze) {
                 for (Cell cell : row) {

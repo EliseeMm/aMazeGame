@@ -3,6 +3,7 @@ package com.mazegame.Algorithms;
 import com.mazegame.CellsAndWalls.Cell;
 import com.mazegame.CellsAndWalls.CellType;
 import com.mazegame.Grid;
+import javafx.scene.paint.Color;
 
 
 import java.util.ArrayList;
@@ -10,8 +11,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
-public class DepthFirstSearchMaze {
+public class DepthFirstSearchMaze implements Algorithms{
     Grid mazeOfMazeBlocks;
+    String wallColor;
     ArrayList<ArrayList<Cell>> gridPoints;
     Random random = new Random();
     private final ArrayList<Cell> visited = new ArrayList<>();
@@ -20,9 +22,10 @@ public class DepthFirstSearchMaze {
         this.mazeOfMazeBlocks = grid;
         gridPoints = mazeOfMazeBlocks.makeGrid();
         findEndPoint(gridPoints);
+        this.wallColor = "green";
     }
 
-    public ArrayList<ArrayList<Cell>> depthFirstSearch(){
+    public ArrayList<ArrayList<Cell>> getGridPoints(){
         Stack<Cell> stackGridPoints = new Stack<>();
         int index = random.nextInt(gridPoints.size());
         ArrayList<Cell> startPoint = gridPoints.get(index);
@@ -65,7 +68,7 @@ public class DepthFirstSearchMaze {
         }
         return neighbors;
     }
-
+    @Override
     public void findEndPoint(ArrayList<ArrayList<Cell>> grid){
         int rowIndex = random.nextInt(grid.size());
         int cellIndex = random.nextInt(grid.get(rowIndex).size());
@@ -74,5 +77,11 @@ public class DepthFirstSearchMaze {
 
 
     }
-
+    public String getWallColor(){
+        return wallColor;
+    }
+    @Override
+    public String toString(){
+        return "dfs";
+    }
 }
