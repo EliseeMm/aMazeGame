@@ -1,12 +1,14 @@
 package com.mazegame.Scenes;
 
-import com.mazegame.*;
 import com.mazegame.Algorithms.Algorithms;
 import com.mazegame.Algorithms.DepthFirstSearchMaze;
 import com.mazegame.Algorithms.Kruskal;
 import com.mazegame.CellsAndWalls.Cell;
 import com.mazegame.CellsAndWalls.CellType;
 import com.mazegame.CellsAndWalls.Wall;
+import com.mazegame.Grid;
+import com.mazegame.PlayerInfo;
+import com.mazegame.Runner;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -16,8 +18,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
+
 
 public class MazeScene {
     private Rectangle endPoint;
@@ -34,16 +38,16 @@ public class MazeScene {
         timeStage = new Stage();
         this.mazeStage = stage;
         this.grid = grid;
-        Timer timer = new Timer();
-        timeline = timer.start(timeStage);
+//        Timer timer = new Timer();
+//        timeline = timer.start(timeStage);
         gameOn = true;
 
     }
     public Scene createMazeScene() {
 
-        if(gameOn){
-            timeline.play();
-        }
+//        if(gameOn){
+//            timeline.play();
+//        }
 
         Scene scene;
         ArrayList<ArrayList<Cell>> maze;
@@ -137,7 +141,13 @@ public class MazeScene {
             scene = new Scene(root, 700, 700);
 
 
-                timeline.setOnFinished(actionEvent -> close());
+//            timeline.setOnFinished(actionEvent -> {
+//                try {
+//                    close();
+//                } catch (FileNotFoundException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            });
 
 
 
@@ -219,8 +229,13 @@ public class MazeScene {
         this.algo = algo;
     }
 
-    public void close(){
+    public void close() throws FileNotFoundException {
+        System.out.println(PlayerInfo.getPlayerName());;
+        PlayerInfo.setPlayerScore(score);
+        System.out.println(PlayerInfo.getPlayerScore());
+
         System.exit(0);
+
     }
 
 }

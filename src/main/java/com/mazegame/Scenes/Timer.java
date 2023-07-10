@@ -25,7 +25,7 @@ public class Timer extends Label {
 
         // Create duration property for time remaining:
         ObjectProperty<java.time.Duration> remainingDuration
-                = new SimpleObjectProperty<>(java.time.Duration.ofSeconds(10)); // Here: 5 sec count down
+                = new SimpleObjectProperty<>(java.time.Duration.ofSeconds(30)); // Here: 5 sec count down
 
         // Binding with media time format (hh:mm:ss):
         countDownLabel.textProperty().bind(Bindings.createStringBinding(() ->

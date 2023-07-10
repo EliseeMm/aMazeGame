@@ -1,5 +1,6 @@
 package com.mazegame.Scenes;
 
+import com.mazegame.PlayerInfo;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -48,7 +49,8 @@ public class UserNameScene {
 
         nameField.setOnAction(actionEvent -> {
             if (!nameField.getText().isEmpty() && nameField.getText().length() <= 5) {
-                playerName = nameField.getText();
+                PlayerInfo playerInfo = new PlayerInfo();
+                playerInfo.setPlayerName(nameField.getText());
                 switchScene(nextScene);
             }
             nameField.clear();
@@ -59,14 +61,6 @@ public class UserNameScene {
     public void switchScene(Scene scene){
         stage.setScene(scene);
     }
-
-//    @Override
-//    public void start(Stage stage) throws Exception {
-//        scene = userName();
-//        stage.setScene(scene);
-//        stage.show();
-//
-//    }
     public String getPlayerName(){
         return playerName;
     }
