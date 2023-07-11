@@ -21,14 +21,16 @@ public class AlgorithmSelectorScene {
 
         Button kruskalButton = new Button("kruskal");
         Button dfsButton = new Button("DFS");
+        Button primButton = new Button("Prim");
         Button randomButton = new Button("Randomised");
 
 
         kruskalButton.setOnAction(actionEvent -> setRequestedAlgo("kruskal"));
         dfsButton.setOnAction(actionEvent -> setRequestedAlgo("dfs"));
+        primButton.setOnAction(actionEvent -> setRequestedAlgo("prim"));
         randomButton.setOnAction(actionEvent -> setRequestedAlgo("random"));
 
-        root.getChildren().addAll(kruskalButton,dfsButton,randomButton);
+        root.getChildren().addAll(kruskalButton,dfsButton,primButton,randomButton);
         root.setAlignment(Pos.CENTER);
         this.nextScene = nextScene;
         this.stage = stage;

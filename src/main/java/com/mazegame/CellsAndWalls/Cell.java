@@ -105,6 +105,9 @@ public class Cell {
                 }
             }
     }
+    public void removeAWall(Wall wall){
+        this.getWalls().remove(wall);
+    }
 
     public boolean withinBox(int size){
         return this.x < size && this.x >= 0 && this.y < size && this.y >= 0;

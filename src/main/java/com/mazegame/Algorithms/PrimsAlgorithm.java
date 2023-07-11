@@ -19,7 +19,7 @@ public class PrimsAlgorithm implements Algorithms{
     public PrimsAlgorithm(Grid grid){
         this.mazeOfMazeBlocks = grid;
         gridPoints = mazeOfMazeBlocks.makeGrid();
-        wallColor = "pink";
+        wallColor = "yellow";
         prims();
         findEndPoint(gridPoints);
     }
@@ -42,33 +42,25 @@ public class PrimsAlgorithm implements Algorithms{
         return gridPoints;
     }
 
-    public ArrayList<ArrayList<Cell>> prims(){
+    public void prims(){
         int index = random.nextInt(gridPoints.size());
         ArrayList<Cell> startPoint = gridPoints.get(index);
 
-//      choose a random starting cell
         Cell startingCell = startPoint.get(index);
 
-
-//      mark it as visited
         visitedCells.add(startingCell);
 
         List<Wall> frontierWalls = new ArrayList<>();
 
-
-//      add its wall to the frontier
         for (Cell cell : visitedCells) {
             ArrayList<Wall> walls = cell.getWalls();
             frontierWalls.addAll(walls);
         }
         while (!frontierWalls.isEmpty()) {
-//      randomly select a cell from the frontier
             Wall frontierWall = frontierWalls.get(random.nextInt(frontierWalls.size()));
 
-//      find unvisited adjacent
             List<Cell> adjacentCells = findAdjacentCell(gridPoints, frontierWall);
 
-//
             if (adjacentCells.size() == 2) {
                 if(visitedCells.contains(adjacentCells.get(0)) && !visitedCells.contains(adjacentCells.get(1))) {
                     adjacentCells.get(0).removeAWall(frontierWall);
@@ -91,7 +83,6 @@ public class PrimsAlgorithm implements Algorithms{
             frontierWalls.remove(frontierWall);
         }
 
-        return gridPoints;
     }
     public List<Cell> findAdjacentCell(ArrayList<ArrayList<Cell>> gridPoints, Wall wall) {
         List<Cell> adjacentCells = new ArrayList<>();
@@ -104,30 +95,5 @@ public class PrimsAlgorithm implements Algorithms{
         }
 
         return adjacentCells;
-    }
-    public ArrayList<Cell> findNeighbors(Cell gridPoint){
-        ArrayList<Cell> neighbors = new ArrayList<>();
-
-        Cell northPoint = new Cell(gridPoint.getX(),gridPoint.getY()+1);
-        Cell southPoint = new Cell(gridPoint.getX(),gridPoint.getY()-1);
-        Cell eastPoint = new Cell(gridPoint.getX() + 1,gridPoint.getY());
-        Cell westPoint = new Cell(gridPoint.getX() - 1,gridPoint.getY());
-
-        for (ArrayList<Cell> row: gridPoints) {
-            for (Cell cell : row) {
-                if (cell.equals(northPoint) || cell.equals(southPoint) || cell.equals(eastPoint) || cell.equals(westPoint)){
-                    if(cell.withinBox(mazeOfMazeBlocks.getSize()) && !visitedCells.contains(cell)){
-                        neighbors.add(cell);
-                    }
-                }
-            }
-        }
-        return neighbors;
-    }
-
-    public static void main(String[] args) {
-        Grid grid = new Grid(12);
-        PrimsAlgorithm primsAlgorithm = new PrimsAlgorithm(grid);
-        primsAlgorithm.prims();
     }
 }

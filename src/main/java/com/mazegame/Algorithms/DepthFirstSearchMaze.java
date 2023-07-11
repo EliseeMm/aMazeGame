@@ -3,7 +3,6 @@ package com.mazegame.Algorithms;
 import com.mazegame.CellsAndWalls.Cell;
 import com.mazegame.CellsAndWalls.CellType;
 import com.mazegame.Grid;
-import javafx.scene.paint.Color;
 
 
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class DepthFirstSearchMaze implements Algorithms{
         this.mazeOfMazeBlocks = grid;
         gridPoints = mazeOfMazeBlocks.makeGrid();
         findEndPoint(gridPoints);
-        this.wallColor = "green";
+        this.wallColor = "blue";
     }
 
     public ArrayList<ArrayList<Cell>> getGridPoints(){
