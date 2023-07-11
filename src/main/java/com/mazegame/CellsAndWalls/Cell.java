@@ -93,33 +93,36 @@ public class Cell {
 
         for (int i = 0; i < wallsInCellA.size(); i++) {
 
-                if (wallsInCellB.contains(wallsInCellA.get(i))) {
+            if (wallsInCellB.contains(wallsInCellA.get(i))) {
 
-                    Wall cell = wallsInCellA.get(i);
-                    wallsInCellA.remove(cell);
-                    wallsInCellB.remove(cell);
+                Wall cell = wallsInCellA.get(i);
+                wallsInCellA.remove(cell);
+                wallsInCellB.remove(cell);
 
-                    this.setWalls(wallsInCellA);
-                    b.setWalls(wallsInCellB);
+                this.setWalls(wallsInCellA);
+                b.setWalls(wallsInCellB);
 
-                }
             }
+        }
     }
-    public void removeAWall(Wall wall){
+
+    public void removeAWall(Wall wall) {
         this.getWalls().remove(wall);
     }
 
-    public boolean withinBox(int size){
+    public boolean withinBox(int size) {
         return this.x < size && this.x >= 0 && this.y < size && this.y >= 0;
     }
 
-    public boolean withinTwoPoints(Cell cellA,Cell cellB){
-        return  this.x > cellA.getX() && this.x < cellB.getX() && this.y  > cellA.getY() && this.y < cellB.getY();
+    public boolean withinTwoPoints(Cell cellA, Cell cellB) {
+        return this.x > cellA.getX() && this.x < cellB.getX() && this.y > cellA.getY() && this.y < cellB.getY();
     }
-    public void setCellID(Cell id){
+
+    public void setCellID(Cell id) {
         this.cellID = id;
     }
-    public Cell getCellID(){
+
+    public Cell getCellID() {
         return this.cellID;
     }
 }

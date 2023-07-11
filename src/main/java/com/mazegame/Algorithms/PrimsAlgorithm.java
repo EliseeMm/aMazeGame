@@ -9,20 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class PrimsAlgorithm implements Algorithms{
-    Grid mazeOfMazeBlocks;
-    ArrayList<ArrayList<Cell>> gridPoints;
-    String wallColor;
-    Random random = new Random();
-    List<Cell> visitedCells = new ArrayList<>();
-    List<Wall> wallList = new ArrayList<>();
-    public PrimsAlgorithm(Grid grid){
+public class PrimsAlgorithm implements Algorithms {
+    private Grid mazeOfMazeBlocks;
+    private ArrayList<ArrayList<Cell>> gridPoints;
+    private String wallColor;
+    private Random random = new Random();
+    private List<Cell> visitedCells = new ArrayList<>();
+    private List<Wall> wallList = new ArrayList<>();
+
+    public PrimsAlgorithm(Grid grid) {
         this.mazeOfMazeBlocks = grid;
         gridPoints = mazeOfMazeBlocks.makeGrid();
         wallColor = "yellow";
         prims();
         findEndPoint(gridPoints);
     }
+
     @Override
     public void findEndPoint(ArrayList<ArrayList<Cell>> grid) {
         int rowIndex = random.nextInt(grid.size());
@@ -42,7 +44,7 @@ public class PrimsAlgorithm implements Algorithms{
         return gridPoints;
     }
 
-    public void prims(){
+    private void prims() {
         int index = random.nextInt(gridPoints.size());
         ArrayList<Cell> startPoint = gridPoints.get(index);
 
@@ -62,7 +64,7 @@ public class PrimsAlgorithm implements Algorithms{
             List<Cell> adjacentCells = findAdjacentCell(gridPoints, frontierWall);
 
             if (adjacentCells.size() == 2) {
-                if(visitedCells.contains(adjacentCells.get(0)) && !visitedCells.contains(adjacentCells.get(1))) {
+                if (visitedCells.contains(adjacentCells.get(0)) && !visitedCells.contains(adjacentCells.get(1))) {
                     adjacentCells.get(0).removeAWall(frontierWall);
                     adjacentCells.get(1).removeAWall(frontierWall);
                     visitedCells.add(adjacentCells.get(1));
@@ -70,7 +72,7 @@ public class PrimsAlgorithm implements Algorithms{
                     frontierWalls.addAll(adjacentCells.get(1).getWalls());
                 }
 
-                if(visitedCells.contains(adjacentCells.get(1)) && !visitedCells.contains(adjacentCells.get(0))) {
+                if (visitedCells.contains(adjacentCells.get(1)) && !visitedCells.contains(adjacentCells.get(0))) {
                     adjacentCells.get(0).removeAWall(frontierWall);
                     adjacentCells.get(1).removeAWall(frontierWall);
                     visitedCells.add(adjacentCells.get(0));
@@ -84,11 +86,12 @@ public class PrimsAlgorithm implements Algorithms{
         }
 
     }
-    public List<Cell> findAdjacentCell(ArrayList<ArrayList<Cell>> gridPoints, Wall wall) {
+
+    private List<Cell> findAdjacentCell(ArrayList<ArrayList<Cell>> gridPoints, Wall wall) {
         List<Cell> adjacentCells = new ArrayList<>();
         for (ArrayList<Cell> row : gridPoints) {
             for (Cell cell : row) {
-                if(cell.getWalls().contains(wall)){
+                if (cell.getWalls().contains(wall)) {
                     adjacentCells.add(cell);
                 }
             }

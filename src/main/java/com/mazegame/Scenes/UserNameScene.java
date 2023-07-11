@@ -1,7 +1,6 @@
 package com.mazegame.Scenes;
 
 import com.mazegame.PlayerInfo;
-import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
@@ -18,7 +17,7 @@ public class UserNameScene {
     private Stage stage;
     private Scene nextScene;
 
-    public UserNameScene(Stage stage,Scene scene){
+    public UserNameScene(Stage stage, Scene scene) {
         this.stage = stage;
         this.nextScene = scene;
         this.scene = userName();
@@ -31,7 +30,7 @@ public class UserNameScene {
 
 
         Text text = new Text();
-        text.setFont(Font.font("Comic Sans MS",FontWeight.BOLD,12));
+        text.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
         text.setText("    UserName\n1 to 5 characters");
         text.setX(12);
         text.setY(12);
@@ -42,10 +41,10 @@ public class UserNameScene {
         nameField.autosize();
         Text text2 = new Text();
         text2.setFill(Color.DARKCYAN);
-        text2.setFont(Font.font("Comic Sans MS",FontWeight.BOLD,12));
+        text2.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, 12));
         text2.setText("Enter to save.");
         root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(text,nameField,text2);
+        root.getChildren().addAll(text, nameField, text2);
 
         nameField.setOnAction(actionEvent -> {
             if (!nameField.getText().isEmpty() && nameField.getText().length() <= 5) {
@@ -58,13 +57,15 @@ public class UserNameScene {
         return scene;
     }
 
-    public void switchScene(Scene scene){
+    public void switchScene(Scene scene) {
         stage.setScene(scene);
     }
-    public String getPlayerName(){
+
+    public String getPlayerName() {
         return playerName;
     }
-    public Scene getScene(){
+
+    public Scene getScene() {
         return this.scene;
     }
 

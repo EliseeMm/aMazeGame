@@ -4,7 +4,6 @@ package com.mazegame.Scenes;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -15,7 +14,7 @@ public class AlgorithmSelectorScene {
     private final Stage stage;
 
 
-    public AlgorithmSelectorScene(Stage stage,MazeScene nextScene){
+    public AlgorithmSelectorScene(Stage stage, MazeScene nextScene) {
         VBox root = new VBox();
 
 
@@ -30,11 +29,11 @@ public class AlgorithmSelectorScene {
         primButton.setOnAction(actionEvent -> setRequestedAlgo("prim"));
         randomButton.setOnAction(actionEvent -> setRequestedAlgo("random"));
 
-        root.getChildren().addAll(kruskalButton,dfsButton,primButton,randomButton);
+        root.getChildren().addAll(kruskalButton, dfsButton, primButton, randomButton);
         root.setAlignment(Pos.CENTER);
         this.nextScene = nextScene;
         this.stage = stage;
-        scene = new Scene(root,200,200);
+        scene = new Scene(root, 200, 200);
 
     }
 
@@ -43,14 +42,15 @@ public class AlgorithmSelectorScene {
         switchScene(nextScene);
     }
 
-    public Scene getScene(){
+    public Scene getScene() {
         return scene;
     }
 
-    public String getRequestedAlgo(){
+    public String getRequestedAlgo() {
         return requestedAlgo;
     }
-    public void switchScene(MazeScene scene){
+
+    public void switchScene(MazeScene scene) {
         scene.setAlgo(getRequestedAlgo());
         this.stage.setScene(scene.createMazeScene());
     }

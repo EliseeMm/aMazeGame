@@ -21,7 +21,7 @@ public class PlayerInfo {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return playerName;
     }
 

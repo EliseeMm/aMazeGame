@@ -22,7 +22,7 @@ public class dfsTest {
         Grid grid = new Grid(4);
         ArrayList<ArrayList<Cell>> grids = grid.makeGrid();
 
-        for(int i = 0;i < 1000;i++) {
+        for (int i = 0; i < 1000; i++) {
             DepthFirstSearchMaze dfs = new DepthFirstSearchMaze(grid);
             ArrayList<ArrayList<Cell>> maze = dfs.getGridPoints();
 

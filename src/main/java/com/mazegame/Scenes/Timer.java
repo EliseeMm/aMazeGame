@@ -1,7 +1,5 @@
 package com.mazegame.Scenes;
 
-import javafx.stage.Stage;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
@@ -12,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.time.temporal.ChronoUnit;
@@ -44,7 +43,6 @@ public class Timer extends Label {
 
         // Show alert when time is up:
         countDownTimeLine.setOnFinished(event -> new Alert(Alert.AlertType.INFORMATION).show());
-
 
 
         // Prepare and show stage:

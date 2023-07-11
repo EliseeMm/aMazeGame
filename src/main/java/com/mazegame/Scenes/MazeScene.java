@@ -32,10 +32,11 @@ public class MazeScene {
     private final Stage mazeStage;
     private String playerName;
     private String algo;
-    private Stage timeStage;
+    private final Stage timeStage;
     private Timeline timeline;
-    private Boolean gameOn;
-    public MazeScene(Stage stage,Grid grid){
+    private final Boolean gameOn;
+
+    public MazeScene(Stage stage, Grid grid) {
         timeStage = new Stage();
         this.mazeStage = stage;
         this.grid = grid;
@@ -44,6 +45,7 @@ public class MazeScene {
         gameOn = true;
 
     }
+
     public Scene createMazeScene() {
 
 //        if(gameOn){
@@ -58,7 +60,7 @@ public class MazeScene {
             int obstacleSize = 45;
 
             String colorWall;
-            if(this.algo.equalsIgnoreCase("kruskal")){
+            if (this.algo.equalsIgnoreCase("kruskal")) {
                 Kruskal kruskal = new Kruskal(grid);
                 maze = kruskal.getGridPoints();
                 colorWall = kruskal.getWallColor();
@@ -71,9 +73,8 @@ public class MazeScene {
                 PrimsAlgorithm kruskal = new PrimsAlgorithm(grid);
                 maze = kruskal.getGridPoints();
                 colorWall = kruskal.getWallColor();
-            }
-            else {
-                Algorithms[] algorithms = {new Kruskal(grid),new DepthFirstSearchMaze(grid), new PrimsAlgorithm(grid)};
+            } else {
+                Algorithms[] algorithms = {new Kruskal(grid), new DepthFirstSearchMaze(grid), new PrimsAlgorithm(grid)};
                 Random random = new Random();
                 int algoIndex = random.nextInt(algorithms.length);
 
@@ -131,7 +132,7 @@ public class MazeScene {
                             }
                         }
                         lines.add(line);
-                        line.setStyle("-fx-stroke: "+ colorWall +";");
+                        line.setStyle("-fx-stroke: " + colorWall + ";");
                         root.getChildren().add(line);
                     }
                     offset += (obstacleSize - 1);
@@ -155,8 +156,6 @@ public class MazeScene {
 //                    throw new RuntimeException(e);
 //                }
 //            });
-
-
 
 
             scene.setOnKeyPressed(keyEvent -> {
@@ -183,7 +182,7 @@ public class MazeScene {
                     }
                 }
                 if (robotInEndPoint(runner, endPoint)) {
-                    score +=1;
+                    score += 1;
                     switchScene(createMazeScene());
                     mazeStage.show();
 
@@ -195,7 +194,8 @@ public class MazeScene {
         }
         return scene;
     }
-    public Rectangle getRunnerStartingCell(ArrayList<Rectangle> cells){
+
+    public Rectangle getRunnerStartingCell(ArrayList<Rectangle> cells) {
         Random random = new Random();
         while (true) {
             int rectangleIndex = random.nextInt(cells.size());
@@ -205,39 +205,44 @@ public class MazeScene {
             }
         }
     }
-    public Cell findCellCentre(Rectangle rectangle,int obstacleSize){
+
+    public Cell findCellCentre(Rectangle rectangle, int obstacleSize) {
         float x = (float) rectangle.getX();
         float y = (float) rectangle.getY();
-        return new Cell(x+((float) obstacleSize /3),y+((float) obstacleSize /3));
+        return new Cell(x + ((float) obstacleSize / 3), y + ((float) obstacleSize / 3));
     }
-    public boolean linesDoNotIntersect(Runner runner, ArrayList<Line> lines, int translateX, int translateY){
+
+    public boolean linesDoNotIntersect(Runner runner, ArrayList<Line> lines, int translateX, int translateY) {
         Line runnerLine = new Line();
         runnerLine.setStartX(runner.getTranslateX());
         runnerLine.setStartY(runner.getTranslateY());
         runnerLine.setEndX(runner.getTranslateX() + translateX);
         runnerLine.setEndY(runner.getTranslateY() + translateY);
-        for (Line line : lines){
-            if(runnerLine.getBoundsInParent().intersects(line.getBoundsInParent())){
+        for (Line line : lines) {
+            if (runnerLine.getBoundsInParent().intersects(line.getBoundsInParent())) {
                 return false;
             }
         }
         return true;
     }
-    public boolean robotInEndPoint(Runner runner, Rectangle rectangle){
+
+    public boolean robotInEndPoint(Runner runner, Rectangle rectangle) {
         Cell runnerCell = new Cell((float) runner.getTranslateX(), (float) runner.getTranslateY());
-        Cell rectangleTopLeft = new Cell((float) rectangle.getX(),(float) rectangle.getY());
+        Cell rectangleTopLeft = new Cell((float) rectangle.getX(), (float) rectangle.getY());
         Cell rectangleBottomRight = new Cell((float) ((float) rectangle.getX() + rectangle.getHeight()), (float) ((float) rectangle.getY() + rectangle.getHeight()));
-        return  runnerCell.withinTwoPoints(rectangleTopLeft,rectangleBottomRight);
+        return runnerCell.withinTwoPoints(rectangleTopLeft, rectangleBottomRight);
     }
-    public void switchScene(Scene scene){
+
+    public void switchScene(Scene scene) {
         mazeStage.setScene(scene);
     }
-    public void setAlgo(String algo){
+
+    public void setAlgo(String algo) {
         this.algo = algo;
     }
 
     public void close() throws FileNotFoundException {
-        System.out.println(PlayerInfo.getPlayerName());;
+        System.out.println(PlayerInfo.getPlayerName());
         PlayerInfo.setPlayerScore(score);
         System.out.println(PlayerInfo.getPlayerScore());
 

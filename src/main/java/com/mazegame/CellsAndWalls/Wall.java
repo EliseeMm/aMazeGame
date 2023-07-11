@@ -1,13 +1,13 @@
 package com.mazegame.CellsAndWalls;
 
-public class Wall{
+public class Wall {
 
     private final float x;
     private final float y;
 
     private WallPosition wallPosition;
 
-    public Wall(float x,float y){
+    public Wall(float x, float y) {
         this.x = x;
         this.y = y;
         this.wallPosition = WallPosition.TOP;
