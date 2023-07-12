@@ -11,18 +11,16 @@ import java.util.List;
 import java.util.Random;
 
 public class Prims implements Algorithms {
-    private Grid mazeOfMazeBlocks;
-    private ArrayList<ArrayList<Cell>> gridPoints;
-    private String wallColor;
-    private Random random = new Random();
-    private List<Cell> visitedCells = new ArrayList<>();
-    private List<Wall> wallList = new ArrayList<>();
+    private final ArrayList<ArrayList<Cell>> gridPoints;
+    private final String wallColor;
+    private final Random random = new Random();
+    private final List<Cell> visitedCells = new ArrayList<>();
+    private final List<Wall> wallList = new ArrayList<>();
 
     private final Color color = Color.YELLOW;
 
     public Prims(Grid grid) {
-        this.mazeOfMazeBlocks = grid;
-        gridPoints = mazeOfMazeBlocks.makeGrid();
+        gridPoints = grid.makeGrid();
         wallColor = "yellow";
         prims();
         findEndPoint(gridPoints);

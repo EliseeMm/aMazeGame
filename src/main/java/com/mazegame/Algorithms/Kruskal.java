@@ -12,18 +12,15 @@ import java.util.List;
 import java.util.Random;
 
 public class Kruskal implements Algorithms {
-    private Grid mazeOfMazeBlocks;
-    private ArrayList<ArrayList<Cell>> gridPoints;
-    private Random random = new Random();
-    private String wallColor;
+    private final ArrayList<ArrayList<Cell>> gridPoints;
+    private final Random random = new Random();
+    private final String wallColor;
     private final Color color = Color.RED;
+    private final List<Wall> wallList = new ArrayList<>();
 
-    private static List<Wall> wallList = new ArrayList<>();
-    private static List<Wall> wallsWithTwoNeighbors = new ArrayList<>();
 
     public Kruskal(Grid grid) {
-        this.mazeOfMazeBlocks = grid;
-        gridPoints = mazeOfMazeBlocks.makeGrid();
+        gridPoints = grid.makeGrid();
         wallColor = "red";
         populateWalls(gridPoints);
         setCellIds(gridPoints);
@@ -44,22 +41,10 @@ public class Kruskal implements Algorithms {
         }
     }
 
-    public List<Wall> getWallList() {
-        return wallList;
-    }
-
     private void setCellIds(ArrayList<ArrayList<Cell>> gridPoints) {
         for (ArrayList<Cell> row : gridPoints) {
             for (Cell cell : row) {
                 cell.setCellID(cell);
-            }
-        }
-    }
-
-    private void getCellIds(ArrayList<ArrayList<Cell>> gridPoints) {
-        for (ArrayList<Cell> row : gridPoints) {
-            for (Cell cell : row) {
-                System.out.println(cell.getCellID());
             }
         }
     }
@@ -121,7 +106,7 @@ public class Kruskal implements Algorithms {
         return wallColor;
     }
 
-    private ArrayList<ArrayList<Cell>> kruskal() {
+    private void kruskal() {
         Collections.shuffle(wallList);
         while (!wallList.isEmpty()) {
             Wall wall = wallList.get(0);
@@ -131,7 +116,6 @@ public class Kruskal implements Algorithms {
             }
             wallList.remove(wall);
         }
-        return gridPoints;
     }
 
     @Override

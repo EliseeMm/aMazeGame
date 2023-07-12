@@ -6,8 +6,8 @@ import javafx.scene.shape.Rectangle;
 public class Runner extends Rectangle {
     int obstacleSize;
 
-    public Runner(int startingX, int startingY, Color color, int obstacleSize) {
-        super(startingX, startingY, color);
+    public Runner(int startingX, int startingY, int obstacleSize) {
+        super(startingX, startingY, Color.DARKMAGENTA);
         this.obstacleSize = obstacleSize;
         setWidth((double) obstacleSize / 3);
         setHeight((double) obstacleSize / 3);

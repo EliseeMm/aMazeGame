@@ -10,16 +10,17 @@ import java.util.List;
 import java.util.Random;
 
 public class AldousBroder implements Algorithms {
-    private Grid mazeOfMazeBlocks;
-    private ArrayList<ArrayList<Cell>> gridPoints;
-    private String wallColor;
-    private Random random = new Random();
-    private List<Cell> visitedCells = new ArrayList<>();
-    private List<Cell> totalCells = new ArrayList<>();
+    private final Grid mazeOfMazeBlocks;
+    private final ArrayList<ArrayList<Cell>> gridPoints;
+    private final String wallColor;
+    private final Random random = new Random();
+    private final List<Cell> visitedCells = new ArrayList<>();
+    private final List<Cell> totalCells = new ArrayList<>();
     private final Color color = Color.GREEN;
+
     public AldousBroder(Grid grid){
         this.mazeOfMazeBlocks = grid;
-        gridPoints = mazeOfMazeBlocks.makeGrid();
+        gridPoints = grid.makeGrid();
         wallColor = "green";
         for (ArrayList<Cell> row : gridPoints){
             totalCells.addAll(row);
@@ -94,10 +95,5 @@ public class AldousBroder implements Algorithms {
             }
         }
         return neighbors;
-    }
-
-    public static void main(String[] args) {
-        AldousBroder aldousBroder = new AldousBroder(new Grid(12));
-        aldousBroder.algo();
     }
 }

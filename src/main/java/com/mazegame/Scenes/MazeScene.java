@@ -33,6 +33,8 @@ public class MazeScene {
     private Timeline timeline;
     private final Boolean gameOn;
     private Algorithms algorithms;
+    private String colorWall;
+    private ArrayList<ArrayList<Cell>> maze;
 
     public MazeScene(Stage stage, Grid grid) {
         timeStage = new Stage();
@@ -51,42 +53,15 @@ public class MazeScene {
 //        }
 
         Scene scene;
-        ArrayList<ArrayList<Cell>> maze;
         try {
             int offset = 80;
             int offsetY = 50;
             int obstacleSize = 45;
 
-            String colorWall;
-            if (this.algo.equalsIgnoreCase("kruskal")) {
-                algorithms = new Kruskal(grid);
-                maze = algorithms.getGridPoints();
-                colorWall = algorithms.getWallColor();
-            } else if (this.algo.equalsIgnoreCase("dfs")) {
-                algorithms = new DepthFirstSearchMaze(grid);
-                maze = algorithms.getGridPoints();
-                colorWall = algorithms.getWallColor();
-
-            } else if (this.algo.equalsIgnoreCase("prim")) {
-                algorithms = new Prims(grid);
-                maze = algorithms.getGridPoints();
-                colorWall = algorithms.getWallColor();
-
-            } else if (this.algo.equalsIgnoreCase("anb")) {
-                algorithms = new AldousBroder(grid);
-                maze = algorithms.getGridPoints();
-                colorWall = algorithms.getWallColor();
-            }
-            else {
-                Algorithms[] algorithmsList = {new Kruskal(grid), new DepthFirstSearchMaze(grid), new Prims(grid), new AldousBroder(grid)};
-                Random random = new Random();
-                int algoIndex = random.nextInt(algorithmsList.length);
-
-                algorithms = algorithmsList[algoIndex];
-                maze = algorithms.getGridPoints();
-                colorWall = algorithms.getWallColor();
-
-            }
+            GenerateMaze generateMaze = new GenerateMaze(grid,algo);
+            maze = generateMaze.getMaze();
+            colorWall = generateMaze.getColorWall();
+            algorithms = generateMaze.getAlgorithms();
 
             ArrayList<Line> lines = new ArrayList<>();
             ArrayList<Rectangle> cells = new ArrayList<>();
@@ -101,7 +76,7 @@ public class MazeScene {
                     rectangle.setHeight(obstacleSize);
                     rectangle.setWidth(obstacleSize);
                     if (cell.getCellType().equals(CellType.END)) {
-                        rectangle.setFill(Color.DARKCYAN);
+                        rectangle.setFill(Color.STEELBLUE);
                         endPoint = rectangle;
                     }
                     cells.add(rectangle);
@@ -146,13 +121,13 @@ public class MazeScene {
             }
             Rectangle selectedRectangle = getRunnerStartingCell(cells);
             Cell rectangleCentre = findCellCentre(selectedRectangle, obstacleSize);
-            Runner runner = new Runner((int) rectangleCentre.getX(), (int) rectangleCentre.getY(), Color.SEAGREEN, obstacleSize);
+            Runner runner = new Runner((int) rectangleCentre.getX(), (int) rectangleCentre.getY(),obstacleSize);
             Text text = scoreBoard.scoreBoard(score);
             Text text1 = AlgorithmName.algoText(algorithms.getAlgorithmName(),algorithms.getAlorithmColor());
             root.getChildren().addAll(runner,text,text1);
 
             scene = new Scene(root, 700, 700);
-            scene.setFill(Color.SNOW);
+            scene.setFill(Color.SKYBLUE);
 
 
 //            timeline.setOnFinished(actionEvent -> {
@@ -251,7 +226,6 @@ public class MazeScene {
         System.out.println(PlayerInfo.getPlayerName());
         PlayerInfo.setPlayerScore(score);
         System.out.println(PlayerInfo.getPlayerScore());
-
         System.exit(0);
 
     }

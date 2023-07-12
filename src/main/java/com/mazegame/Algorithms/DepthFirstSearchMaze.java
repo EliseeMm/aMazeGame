@@ -11,17 +11,17 @@ import java.util.Random;
 import java.util.Stack;
 
 public class DepthFirstSearchMaze implements Algorithms {
-    private Grid mazeOfMazeBlocks;
-    private String wallColor;
-    private ArrayList<ArrayList<Cell>> gridPoints;
-    private Random random = new Random();
+    private final Grid mazeOfMazeBlocks;
+    private final String wallColor;
+    private final ArrayList<ArrayList<Cell>> gridPoints;
+    private final Random random = new Random();
     private final ArrayList<Cell> visited = new ArrayList<>();
 
     private final Color color = Color.BLUE;
 
     public DepthFirstSearchMaze(Grid grid) {
         this.mazeOfMazeBlocks = grid;
-        gridPoints = mazeOfMazeBlocks.makeGrid();
+        gridPoints = grid.makeGrid();
         findEndPoint(gridPoints);
         this.wallColor = "blue";
     }

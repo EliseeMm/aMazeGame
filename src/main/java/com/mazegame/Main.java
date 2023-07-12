@@ -26,8 +26,6 @@ public class Main extends Application {
         UserNameScene userNameSceneCreator = new UserNameScene(stage, algorithmSelectorScene.getScene());
         Scene userNameScene = userNameSceneCreator.getScene();
         String playerName = userNameSceneCreator.getPlayerName();
-        System.out.println(playerName);
-
         stage.setScene(userNameScene);
         stage.setTitle("MAZE GAME");
         stage.show();
