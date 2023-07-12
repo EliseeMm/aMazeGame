@@ -40,17 +40,17 @@ public class MazeScene {
         timeStage = new Stage();
         this.mazeStage = stage;
         this.grid = grid;
-//        Timer timer = new Timer();
-//        timeline = timer.start(timeStage);
+        Timer timer = new Timer();
+        timeline = timer.start(timeStage);
         gameOn = true;
 
     }
 
     public Scene createMazeScene() {
 
-//        if(gameOn){
-//            timeline.play();
-//        }
+        if(gameOn){
+            timeline.play();
+        }
 
         Scene scene;
         try {
@@ -130,13 +130,13 @@ public class MazeScene {
             scene.setFill(Color.SKYBLUE);
 
 
-//            timeline.setOnFinished(actionEvent -> {
-//                try {
-//                    close();
-//                } catch (FileNotFoundException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            });
+            timeline.setOnFinished(actionEvent -> {
+                try {
+                    close();
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            });
 
 
             scene.setOnKeyPressed(keyEvent -> {
