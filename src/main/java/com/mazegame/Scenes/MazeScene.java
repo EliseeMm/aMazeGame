@@ -1,9 +1,6 @@
 package com.mazegame.Scenes;
 
-import com.mazegame.Algorithms.Algorithms;
-import com.mazegame.Algorithms.DepthFirstSearchMaze;
-import com.mazegame.Algorithms.Kruskal;
-import com.mazegame.Algorithms.PrimsAlgorithm;
+import com.mazegame.Algorithms.*;
 import com.mazegame.CellsAndWalls.Cell;
 import com.mazegame.CellsAndWalls.CellType;
 import com.mazegame.CellsAndWalls.Wall;
@@ -70,11 +67,17 @@ public class MazeScene {
                 colorWall = dfs.getWallColor();
 
             } else if (this.algo.equalsIgnoreCase("prim")) {
-                PrimsAlgorithm kruskal = new PrimsAlgorithm(grid);
-                maze = kruskal.getGridPoints();
-                colorWall = kruskal.getWallColor();
-            } else {
-                Algorithms[] algorithms = {new Kruskal(grid), new DepthFirstSearchMaze(grid), new PrimsAlgorithm(grid)};
+                Prims prims = new Prims(grid);
+                maze = prims.getGridPoints();
+                colorWall = prims.getWallColor();
+
+            } else if (this.algo.equalsIgnoreCase("anb")) {
+                AldousBroder aldousBroder = new AldousBroder(grid);
+                maze = aldousBroder.getGridPoints();
+                colorWall = aldousBroder.getWallColor();
+            }
+            else {
+                Algorithms[] algorithms = {new Kruskal(grid), new DepthFirstSearchMaze(grid), new Prims(grid), new AldousBroder(grid)};
                 Random random = new Random();
                 int algoIndex = random.nextInt(algorithms.length);
 

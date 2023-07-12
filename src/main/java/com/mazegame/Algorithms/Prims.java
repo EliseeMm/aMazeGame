@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class PrimsAlgorithm implements Algorithms {
+public class Prims implements Algorithms {
     private Grid mazeOfMazeBlocks;
     private ArrayList<ArrayList<Cell>> gridPoints;
     private String wallColor;
@@ -17,7 +17,7 @@ public class PrimsAlgorithm implements Algorithms {
     private List<Cell> visitedCells = new ArrayList<>();
     private List<Wall> wallList = new ArrayList<>();
 
-    public PrimsAlgorithm(Grid grid) {
+    public Prims(Grid grid) {
         this.mazeOfMazeBlocks = grid;
         gridPoints = mazeOfMazeBlocks.makeGrid();
         wallColor = "yellow";
