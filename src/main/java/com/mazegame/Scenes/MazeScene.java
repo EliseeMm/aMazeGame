@@ -32,6 +32,7 @@ public class MazeScene {
     private final Stage timeStage;
     private Timeline timeline;
     private final Boolean gameOn;
+    private Algorithms algorithms;
 
     public MazeScene(Stage stage, Grid grid) {
         timeStage = new Stage();
@@ -58,32 +59,32 @@ public class MazeScene {
 
             String colorWall;
             if (this.algo.equalsIgnoreCase("kruskal")) {
-                Kruskal kruskal = new Kruskal(grid);
-                maze = kruskal.getGridPoints();
-                colorWall = kruskal.getWallColor();
+                algorithms = new Kruskal(grid);
+                maze = algorithms.getGridPoints();
+                colorWall = algorithms.getWallColor();
             } else if (this.algo.equalsIgnoreCase("dfs")) {
-                DepthFirstSearchMaze dfs = new DepthFirstSearchMaze(grid);
-                maze = dfs.getGridPoints();
-                colorWall = dfs.getWallColor();
+                algorithms = new DepthFirstSearchMaze(grid);
+                maze = algorithms.getGridPoints();
+                colorWall = algorithms.getWallColor();
 
             } else if (this.algo.equalsIgnoreCase("prim")) {
-                Prims prims = new Prims(grid);
-                maze = prims.getGridPoints();
-                colorWall = prims.getWallColor();
+                algorithms = new Prims(grid);
+                maze = algorithms.getGridPoints();
+                colorWall = algorithms.getWallColor();
 
             } else if (this.algo.equalsIgnoreCase("anb")) {
-                AldousBroder aldousBroder = new AldousBroder(grid);
-                maze = aldousBroder.getGridPoints();
-                colorWall = aldousBroder.getWallColor();
+                algorithms = new AldousBroder(grid);
+                maze = algorithms.getGridPoints();
+                colorWall = algorithms.getWallColor();
             }
             else {
-                Algorithms[] algorithms = {new Kruskal(grid), new DepthFirstSearchMaze(grid), new Prims(grid), new AldousBroder(grid)};
+                Algorithms[] algorithmsList = {new Kruskal(grid), new DepthFirstSearchMaze(grid), new Prims(grid), new AldousBroder(grid)};
                 Random random = new Random();
-                int algoIndex = random.nextInt(algorithms.length);
+                int algoIndex = random.nextInt(algorithmsList.length);
 
-                Algorithms randomAlgorithm = algorithms[algoIndex];
-                maze = randomAlgorithm.getGridPoints();
-                colorWall = randomAlgorithm.getWallColor();
+                algorithms = algorithmsList[algoIndex];
+                maze = algorithms.getGridPoints();
+                colorWall = algorithms.getWallColor();
 
             }
 
@@ -147,9 +148,11 @@ public class MazeScene {
             Cell rectangleCentre = findCellCentre(selectedRectangle, obstacleSize);
             Runner runner = new Runner((int) rectangleCentre.getX(), (int) rectangleCentre.getY(), Color.SEAGREEN, obstacleSize);
             Text text = scoreBoard.scoreBoard(score);
-            root.getChildren().add(runner);
-            root.getChildren().add(text);
+            Text text1 = AlgorithmName.algoText(algorithms.getAlgorithmName(),algorithms.getAlorithmColor());
+            root.getChildren().addAll(runner,text,text1);
+
             scene = new Scene(root, 700, 700);
+            scene.setFill(Color.SNOW);
 
 
 //            timeline.setOnFinished(actionEvent -> {

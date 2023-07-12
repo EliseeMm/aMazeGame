@@ -4,6 +4,7 @@ import com.mazegame.CellsAndWalls.Cell;
 import com.mazegame.CellsAndWalls.CellType;
 import com.mazegame.CellsAndWalls.Wall;
 import com.mazegame.Grid;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,6 +16,7 @@ public class Kruskal implements Algorithms {
     private ArrayList<ArrayList<Cell>> gridPoints;
     private Random random = new Random();
     private String wallColor;
+    private final Color color = Color.RED;
 
     private static List<Wall> wallList = new ArrayList<>();
     private static List<Wall> wallsWithTwoNeighbors = new ArrayList<>();
@@ -81,6 +83,16 @@ public class Kruskal implements Algorithms {
 
     public ArrayList<ArrayList<Cell>> getGridPoints() {
         return gridPoints;
+    }
+
+    @Override
+    public String getAlgorithmName() {
+        return "Randomised Kruskal's Algorithm";
+    }
+
+    @Override
+    public Color getAlorithmColor() {
+        return color;
     }
 
     private List<Cell> findAdjacentCell(ArrayList<ArrayList<Cell>> gridPoints, Wall wall) {

@@ -3,6 +3,7 @@ package com.mazegame.Algorithms;
 import com.mazegame.CellsAndWalls.Cell;
 import com.mazegame.CellsAndWalls.CellType;
 import com.mazegame.Grid;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,8 @@ public class DepthFirstSearchMaze implements Algorithms {
     private ArrayList<ArrayList<Cell>> gridPoints;
     private Random random = new Random();
     private final ArrayList<Cell> visited = new ArrayList<>();
+
+    private final Color color = Color.BLUE;
 
     public DepthFirstSearchMaze(Grid grid) {
         this.mazeOfMazeBlocks = grid;
@@ -45,6 +48,16 @@ public class DepthFirstSearchMaze implements Algorithms {
             }
         }
         return gridPoints;
+    }
+
+    @Override
+    public String getAlgorithmName() {
+        return "Depth First Search Algorithm";
+    }
+
+    @Override
+    public Color getAlorithmColor() {
+        return color;
     }
 
     private ArrayList<Cell> findNeighbors(Cell gridPoint) {

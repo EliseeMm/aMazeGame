@@ -3,6 +3,7 @@ package com.mazegame.Algorithms;
 import com.mazegame.CellsAndWalls.Cell;
 import com.mazegame.CellsAndWalls.CellType;
 import com.mazegame.Grid;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class AldousBroder implements Algorithms {
     private Random random = new Random();
     private List<Cell> visitedCells = new ArrayList<>();
     private List<Cell> totalCells = new ArrayList<>();
+    private final Color color = Color.GREEN;
     public AldousBroder(Grid grid){
         this.mazeOfMazeBlocks = grid;
         gridPoints = mazeOfMazeBlocks.makeGrid();
@@ -41,6 +43,16 @@ public class AldousBroder implements Algorithms {
     @Override
     public ArrayList<ArrayList<Cell>> getGridPoints() {
         return gridPoints;
+    }
+
+    @Override
+    public String getAlgorithmName() {
+        return "Aldous-Broder Algorithm";
+    }
+
+    @Override
+    public Color getAlorithmColor() {
+        return color;
     }
 
     public void algo(){

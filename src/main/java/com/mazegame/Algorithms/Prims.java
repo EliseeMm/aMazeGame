@@ -4,6 +4,7 @@ import com.mazegame.CellsAndWalls.Cell;
 import com.mazegame.CellsAndWalls.CellType;
 import com.mazegame.CellsAndWalls.Wall;
 import com.mazegame.Grid;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,8 @@ public class Prims implements Algorithms {
     private Random random = new Random();
     private List<Cell> visitedCells = new ArrayList<>();
     private List<Wall> wallList = new ArrayList<>();
+
+    private final Color color = Color.YELLOW;
 
     public Prims(Grid grid) {
         this.mazeOfMazeBlocks = grid;
@@ -42,6 +45,16 @@ public class Prims implements Algorithms {
     @Override
     public ArrayList<ArrayList<Cell>> getGridPoints() {
         return gridPoints;
+    }
+
+    @Override
+    public String getAlgorithmName() {
+        return "Randomised Prim's Algorithm";
+    }
+
+    @Override
+    public Color getAlorithmColor() {
+        return color;
     }
 
     private void prims() {
