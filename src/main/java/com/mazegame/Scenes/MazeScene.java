@@ -1,12 +1,11 @@
 package com.mazegame.Scenes;
 
+import com.mazegame.*;
 import com.mazegame.Algorithms.*;
 import com.mazegame.CellsAndWalls.Cell;
 import com.mazegame.CellsAndWalls.CellType;
 import com.mazegame.CellsAndWalls.Wall;
-import com.mazegame.Grid;
-import com.mazegame.PlayerInfo;
-import com.mazegame.Runner;
+import com.mazegame.DatabaseHandler.DbConnect;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -17,6 +16,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -34,6 +35,7 @@ public class MazeScene {
     private final Boolean gameOn;
     private Algorithms algorithms;
     private String colorWall;
+    private Color endPointColor = Color.STEELBLUE;
     private ArrayList<ArrayList<Cell>> maze;
 
     public MazeScene(Stage stage, Grid grid) {
@@ -76,7 +78,7 @@ public class MazeScene {
                     rectangle.setHeight(obstacleSize);
                     rectangle.setWidth(obstacleSize);
                     if (cell.getCellType().equals(CellType.END)) {
-                        rectangle.setFill(Color.STEELBLUE);
+                        rectangle.setFill(endPointColor);
                         endPoint = rectangle;
                     }
                     cells.add(rectangle);
@@ -133,7 +135,7 @@ public class MazeScene {
             timeline.setOnFinished(actionEvent -> {
                 try {
                     close();
-                } catch (FileNotFoundException e) {
+                } catch (FileNotFoundException | SQLException e) {
                     throw new RuntimeException(e);
                 }
             });
@@ -181,7 +183,7 @@ public class MazeScene {
         while (true) {
             int rectangleIndex = random.nextInt(cells.size());
             Color rectangleColor = (Color) cells.get(rectangleIndex).getFill();
-            if (!rectangleColor.equals(Color.DARKCYAN)) {
+            if (!rectangleColor.equals(endPointColor)) {
                 return cells.get(rectangleIndex);
             }
         }
@@ -222,12 +224,14 @@ public class MazeScene {
         this.algo = algo;
     }
 
-    public void close() throws FileNotFoundException {
+    public void close() throws FileNotFoundException, SQLException {
         System.out.println(PlayerInfo.getPlayerName());
         PlayerInfo.setPlayerScore(score);
         System.out.println(PlayerInfo.getPlayerScore());
+        DbConnect dbConnect = new DbConnect();
+        Connection connection = dbConnect.getConnection();
+        dbConnect.addPlayerScore(connection,PlayerInfo.getPlayerName(),algo,score);
         System.exit(0);
 
     }
-
 }
