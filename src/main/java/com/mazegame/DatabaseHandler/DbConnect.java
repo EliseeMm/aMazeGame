@@ -37,7 +37,7 @@ public class DbConnect {
             stmt.executeUpdate("CREATE TABLE scores_table(" +
                     "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                     "name TEXT UNIQUE NOT NULL, " +
-                    "algorithm_type TEXT NOT NULL, " +
+                    "c TEXT NOT NULL, " +
                     "score INTEGER NOT NULL )");
             System.out.println("Success creating test table!");
         } catch (SQLException e) {
@@ -65,6 +65,31 @@ public class DbConnect {
             }
         } catch (SQLException SQLITE_ERROR) {
             System.out.println(SQLITE_ERROR.getMessage());
+        }
+    }
+    public void readScoreTable(Connection connection )
+            throws SQLException {
+        try (final PreparedStatement stmt = connection.prepareStatement("SELECT name,algorithm_type,score "
+                + "FROM scores_table "+
+                "ORDER BY score DESC")) {
+            boolean gotAResultSet = stmt.execute();
+            if (!gotAResultSet) {
+                throw new RuntimeException("Expected a SQL resultSet, but we got an update count instead!");
+            }
+            try (ResultSet results = stmt.getResultSet()) {
+                int rowNo = 1;
+                while (results.next()) {
+                    final String playerName = results.getString("name");
+                    final String algorithmType = results.getString("algorithm_type");
+                    final int score = Integer.parseInt(results.getString("score"));
+
+                    final StringBuilder b = new StringBuilder("Row ").append(rowNo).append("-")
+                            .append(playerName).append("-")
+                            .append(algorithmType).append("-")
+                            .append(score);
+                    System.out.println(b.toString());
+                }
+            }
         }
     }
 }

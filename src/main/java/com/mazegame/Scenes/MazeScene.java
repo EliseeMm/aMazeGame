@@ -231,6 +231,7 @@ public class MazeScene {
         DbConnect dbConnect = new DbConnect();
         Connection connection = dbConnect.getConnection();
         dbConnect.addPlayerScore(connection,PlayerInfo.getPlayerName(),algo,score);
+        dbConnect.readScoreTable(connection);
         System.exit(0);
 
     }
