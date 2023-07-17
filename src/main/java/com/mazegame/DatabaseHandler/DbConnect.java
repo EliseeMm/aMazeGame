@@ -42,7 +42,7 @@ public class DbConnect {
             stmt.executeUpdate("CREATE TABLE scores_table(" +
                     "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                     "name TEXT UNIQUE NOT NULL, " +
-                    "c TEXT NOT NULL, " +
+                    "algorithm_type TEXT NOT NULL, " +
                     "score INTEGER NOT NULL )");
             System.out.println("Success creating test table!");
         } catch (SQLException e) {
