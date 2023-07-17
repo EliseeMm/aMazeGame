@@ -6,6 +6,7 @@ import com.mazegame.CellsAndWalls.Cell;
 import com.mazegame.CellsAndWalls.CellType;
 import com.mazegame.CellsAndWalls.Wall;
 import com.mazegame.DatabaseHandler.DbConnect;
+import com.mazegame.ScoresAndNames.ScoreNameAlgorithm;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -232,7 +233,9 @@ public class MazeScene {
         Connection connection = dbConnect.getConnection();
         dbConnect.addPlayerScore(connection,PlayerInfo.getPlayerName(),algo,score);
         dbConnect.readScoreTable(connection);
-        System.exit(0);
+        LeaderBoard leaderBoard = new LeaderBoard();
+        switchScene(leaderBoard.makeTable(dbConnect.readScoreTable(connection)));
+//        System.exit(0);
 
     }
 }

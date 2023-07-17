@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
+
+    private static Stage  stage;
     public static void main(String[] args) {
         launch();
 
@@ -18,6 +20,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        this.stage = stage;
         Grid grid = new Grid(12);
         MazeScene mazeSceneCreator = new MazeScene(stage, grid);
 
@@ -25,9 +28,12 @@ public class Main extends Application {
 
         UserNameScene userNameSceneCreator = new UserNameScene(stage, algorithmSelectorScene.getScene());
         Scene userNameScene = userNameSceneCreator.getScene();
-        String playerName = userNameSceneCreator.getPlayerName();
-        stage.setScene(userNameScene);
-        stage.setTitle("MAZE GAME");
-        stage.show();
+//        String playerName = userNameSceneCreator.getPlayerName();
+        this.stage.setScene(userNameScene);
+        this.stage.setTitle("MAZE GAME");
+        this.stage.show();
+    }
+    public static void restart(){
+        stage.close();
     }
 }

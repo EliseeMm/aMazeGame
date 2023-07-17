@@ -17,14 +17,17 @@ import java.time.temporal.ChronoUnit;
 
 public class Timer extends Label {
 
+    private static Stage stage;
+
     public Timeline start(Stage stage) {
+        this.stage = stage;
 
         // Create label to display the time left:
         Label countDownLabel = new Label();
 
         // Create duration property for time remaining:
         ObjectProperty<java.time.Duration> remainingDuration
-                = new SimpleObjectProperty<>(java.time.Duration.ofSeconds(30)); // Here: 5 sec count down
+                = new SimpleObjectProperty<>(java.time.Duration.ofSeconds(45)); // Here: 5 sec count down
 
         // Binding with media time format (hh:mm:ss):
         countDownLabel.textProperty().bind(Bindings.createStringBinding(() ->
@@ -46,12 +49,13 @@ public class Timer extends Label {
 
 
         // Prepare and show stage:
-        stage.setScene(new Scene(new Pane(countDownLabel), 200, 100));
-        stage.show();
-
-        // Start the time line:
-//        countDownTimeLine.play();
+        this.stage.setScene(new Scene(new Pane(countDownLabel), 200, 100));
+        this.stage.show();
 
         return countDownTimeLine;
+    }
+
+    public static void closeTimer(){
+        stage.close();
     }
 }

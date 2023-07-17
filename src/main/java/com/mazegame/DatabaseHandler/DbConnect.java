@@ -1,6 +1,11 @@
 package com.mazegame.DatabaseHandler;
 
+import com.mazegame.ScoresAndNames.ScoreNameAlgorithm;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * DbTest is a small command-line tool used to check that we can connect to a SQLite database.
@@ -67,29 +72,34 @@ public class DbConnect {
             System.out.println(SQLITE_ERROR.getMessage());
         }
     }
-    public void readScoreTable(Connection connection )
+    public ArrayList<ScoreNameAlgorithm> readScoreTable(Connection connection )
             throws SQLException {
+        ArrayList<ScoreNameAlgorithm> scoreNameAlgorithms;
         try (final PreparedStatement stmt = connection.prepareStatement("SELECT name,algorithm_type,score "
-                + "FROM scores_table "+
-                "ORDER BY score DESC")) {
+                + "FROM scores_table " +
+                "ORDER BY score DESC " +
+                "LIMIT 5"
+        )) {
             boolean gotAResultSet = stmt.execute();
             if (!gotAResultSet) {
                 throw new RuntimeException("Expected a SQL resultSet, but we got an update count instead!");
             }
             try (ResultSet results = stmt.getResultSet()) {
                 int rowNo = 1;
+                scoreNameAlgorithms = new ArrayList<>();
+
                 while (results.next()) {
                     final String playerName = results.getString("name");
                     final String algorithmType = results.getString("algorithm_type");
                     final int score = Integer.parseInt(results.getString("score"));
-
                     final StringBuilder b = new StringBuilder("Row ").append(rowNo).append("-")
                             .append(playerName).append("-")
                             .append(algorithmType).append("-")
                             .append(score);
-                    System.out.println(b.toString());
+                    scoreNameAlgorithms.add(new ScoreNameAlgorithm(playerName, score, algorithmType));
                 }
             }
         }
+        return scoreNameAlgorithms;
     }
 }

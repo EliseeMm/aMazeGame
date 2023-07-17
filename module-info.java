@@ -11,4 +11,5 @@ module aMazeGame {
     opens com.mazegame.Scenes;
     opens com.mazegame.CellsAndWalls;
     opens com.mazegame.DatabaseHandler;
+    opens com.mazegame.ScoresAndNames;
 }
