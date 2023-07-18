@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
+/**
+ * The type Depth first search maze.
+ */
 public class DepthFirstSearchMaze implements Algorithms {
     private final Grid mazeOfMazeBlocks;
     private final String wallColor;
@@ -19,6 +22,11 @@ public class DepthFirstSearchMaze implements Algorithms {
 
     private final Color color = Color.BLUE;
 
+    /**
+     * Instantiates a new Depth first search maze.
+     *
+     * @param grid the grid
+     */
     public DepthFirstSearchMaze(Grid grid) {
         this.mazeOfMazeBlocks = grid;
         gridPoints = grid.makeGrid();

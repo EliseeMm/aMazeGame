@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The type Aldous broder.
+ */
 public class AldousBroder implements Algorithms {
     private final Grid mazeOfMazeBlocks;
     private final ArrayList<ArrayList<Cell>> gridPoints;
@@ -18,6 +21,11 @@ public class AldousBroder implements Algorithms {
     private final List<Cell> totalCells = new ArrayList<>();
     private final Color color = Color.GREEN;
 
+    /**
+     * Instantiates a new Aldous broder.
+     *
+     * @param grid the grid
+     */
     public AldousBroder(Grid grid){
         this.mazeOfMazeBlocks = grid;
         gridPoints = grid.makeGrid();
@@ -56,6 +64,9 @@ public class AldousBroder implements Algorithms {
         return color;
     }
 
+    /**
+     * Algo.
+     */
     public void algo(){
        Cell startingCell = totalCells.remove(random.nextInt(totalCells.size()));
        visitedCells.add(startingCell);

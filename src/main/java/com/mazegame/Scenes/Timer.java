@@ -15,10 +15,19 @@ import javafx.util.Duration;
 
 import java.time.temporal.ChronoUnit;
 
+/**
+ * The type Timer.
+ */
 public class Timer extends Label {
 
     private static Stage stage;
 
+    /**
+     * Start timeline.
+     *
+     * @param stage the stage
+     * @return the timeline
+     */
     public Timeline start(Stage stage) {
         Timer.stage = stage;
 
@@ -55,6 +64,9 @@ public class Timer extends Label {
         return countDownTimeLine;
     }
 
+    /**
+     * Close timer.
+     */
     public static void closeTimer(){
         stage.close();
     }

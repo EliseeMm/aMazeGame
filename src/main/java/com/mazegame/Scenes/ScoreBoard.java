@@ -5,7 +5,16 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+/**
+ * The type Score board.
+ */
 public class ScoreBoard extends Text {
+    /**
+     * Score board text.
+     *
+     * @param score the score
+     * @return the text
+     */
     public Text scoreBoard(int score) {
         Text text = new Text();
         String scoreString = Integer.toString(score);

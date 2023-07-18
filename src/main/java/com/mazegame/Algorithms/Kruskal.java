@@ -11,6 +11,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The type Kruskal.
+ */
 public class Kruskal implements Algorithms {
     private final ArrayList<ArrayList<Cell>> gridPoints;
     private final Random random = new Random();
@@ -19,6 +22,11 @@ public class Kruskal implements Algorithms {
     private final List<Wall> wallList = new ArrayList<>();
 
 
+    /**
+     * Instantiates a new Kruskal.
+     *
+     * @param grid the grid
+     */
     public Kruskal(Grid grid) {
         gridPoints = grid.makeGrid();
         wallColor = "red";

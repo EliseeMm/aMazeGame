@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The type Prims.
+ */
 public class Prims implements Algorithms {
     private final ArrayList<ArrayList<Cell>> gridPoints;
     private final String wallColor;
@@ -19,6 +22,11 @@ public class Prims implements Algorithms {
 
     private final Color color = Color.YELLOW;
 
+    /**
+     * Instantiates a new Prims.
+     *
+     * @param grid the grid
+     */
     public Prims(Grid grid) {
         gridPoints = grid.makeGrid();
         wallColor = "yellow";

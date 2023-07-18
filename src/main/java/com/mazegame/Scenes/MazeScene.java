@@ -24,6 +24,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
+/**
+ * The type Maze scene.
+ */
 public class MazeScene {
     private Rectangle endPoint;
     private final ScoreBoard scoreBoard = new ScoreBoard();
@@ -35,6 +38,12 @@ public class MazeScene {
     private final Boolean gameOn;
     private final Color endPointColor = Color.STEELBLUE;
 
+    /**
+     * Instantiates a new Maze scene.
+     *
+     * @param stage the stage
+     * @param grid  the grid
+     */
     public MazeScene(Stage stage, Grid grid) {
         Stage timeStage = new Stage();
         this.mazeStage = stage;
@@ -45,6 +54,11 @@ public class MazeScene {
 
     }
 
+    /**
+     * Create maze scene scene.
+     *
+     * @return the scene
+     */
     public Scene createMazeScene() {
         if (gameOn) {
             timeline.play();
@@ -174,6 +188,12 @@ public class MazeScene {
         return scene;
     }
 
+    /**
+     * Gets runner starting cell.
+     *
+     * @param cells the cells
+     * @return the runner starting cell
+     */
     public Rectangle getRunnerStartingCell(ArrayList<Rectangle> cells) {
         Random random = new Random();
         while (true) {
@@ -185,12 +205,28 @@ public class MazeScene {
         }
     }
 
+    /**
+     * Find cell centre cell.
+     *
+     * @param rectangle    the rectangle
+     * @param obstacleSize the obstacle size
+     * @return the cell
+     */
     public Cell findCellCentre(Rectangle rectangle, int obstacleSize) {
         float x = (float) rectangle.getX();
         float y = (float) rectangle.getY();
         return new Cell(x + ((float) obstacleSize / 3), y + ((float) obstacleSize / 3));
     }
 
+    /**
+     * Lines do not intersect boolean.
+     *
+     * @param runner     the runner
+     * @param lines      the lines
+     * @param translateX the translate x
+     * @param translateY the translate y
+     * @return the boolean
+     */
     public boolean linesDoNotIntersect(Runner runner, ArrayList<Line> lines, int translateX, int translateY) {
         Line runnerLine = new Line();
         runnerLine.setStartX(runner.getTranslateX());
@@ -205,6 +241,13 @@ public class MazeScene {
         return true;
     }
 
+    /**
+     * Robot in end point boolean.
+     *
+     * @param runner    the runner
+     * @param rectangle the rectangle
+     * @return the boolean
+     */
     public boolean robotInEndPoint(Runner runner, Rectangle rectangle) {
         Cell runnerCell = new Cell((float) runner.getTranslateX(), (float) runner.getTranslateY());
         Cell rectangleTopLeft = new Cell((float) rectangle.getX(), (float) rectangle.getY());
@@ -212,14 +255,30 @@ public class MazeScene {
         return runnerCell.withinTwoPoints(rectangleTopLeft, rectangleBottomRight);
     }
 
+    /**
+     * Switch scene.
+     *
+     * @param scene the scene
+     */
     public void switchScene(Scene scene) {
         mazeStage.setScene(scene);
     }
 
+    /**
+     * Sets algo.
+     *
+     * @param algo the algo
+     */
     public void setAlgo(String algo) {
         this.algo = algo;
     }
 
+    /**
+     * Close.
+     *
+     * @throws FileNotFoundException the file not found exception
+     * @throws SQLException          the sql exception
+     */
     public void close() throws FileNotFoundException, SQLException {
         PlayerInfo.setPlayerScore(score);
         DbConnect dbConnect = new DbConnect();

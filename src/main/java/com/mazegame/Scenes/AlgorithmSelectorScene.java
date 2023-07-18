@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * The type Algorithm selector scene.
+ */
 public class AlgorithmSelectorScene {
     private final Scene scene;
     private final MazeScene nextScene;
@@ -14,6 +17,12 @@ public class AlgorithmSelectorScene {
     private final Stage stage;
 
 
+    /**
+     * Instantiates a new Algorithm selector scene.
+     *
+     * @param stage     the stage
+     * @param nextScene the next scene
+     */
     public AlgorithmSelectorScene(Stage stage, MazeScene nextScene) {
         VBox root = new VBox();
 
@@ -44,14 +53,29 @@ public class AlgorithmSelectorScene {
         switchScene(nextScene);
     }
 
+    /**
+     * Gets scene.
+     *
+     * @return the scene
+     */
     public Scene getScene() {
         return scene;
     }
 
+    /**
+     * Gets requested algo.
+     *
+     * @return the requested algo
+     */
     public String getRequestedAlgo() {
         return requestedAlgo;
     }
 
+    /**
+     * Switch scene.
+     *
+     * @param scene the scene
+     */
     public void switchScene(MazeScene scene) {
         scene.setAlgo(getRequestedAlgo());
         this.stage.setScene(scene.createMazeScene());

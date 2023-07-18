@@ -6,13 +6,30 @@ import com.mazegame.Grid;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * The type Generate maze.
+ */
 public class GenerateMaze {
     private ArrayList<ArrayList<Cell>> maze;
     private String colorWall;
     private Algorithms algorithms;
+
+    /**
+     * Instantiates a new Generate maze.
+     *
+     * @param grid the grid
+     * @param algo the algo
+     */
     public GenerateMaze(Grid grid, String algo){
         generateMaze(grid,algo);
     }
+
+    /**
+     * Generate maze.
+     *
+     * @param grid the grid
+     * @param algo the algo
+     */
     public void generateMaze(Grid grid, String algo){
         if (algo.equalsIgnoreCase("kruskal")) {
             algorithms = new Kruskal(grid);
@@ -36,12 +53,29 @@ public class GenerateMaze {
         colorWall = algorithms.getWallColor();
     }
 
+    /**
+     * Gets maze.
+     *
+     * @return the maze
+     */
     public ArrayList<ArrayList<Cell>> getMaze() {
         return maze;
     }
+
+    /**
+     * Gets algorithms.
+     *
+     * @return the algorithms
+     */
     public Algorithms getAlgorithms() {
         return algorithms;
     }
+
+    /**
+     * Gets color wall.
+     *
+     * @return the color wall
+     */
     public String getColorWall() {
         return colorWall;
     }

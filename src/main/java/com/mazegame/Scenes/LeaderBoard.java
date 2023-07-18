@@ -14,6 +14,9 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
+/**
+ * The type Leader board.
+ */
 public class LeaderBoard {
     private final TableView<ScoreNameAlgorithm> tableView = new TableView<>();
     private final TableColumn<ScoreNameAlgorithm, String> name = new TableColumn<>("Player Name");
@@ -21,6 +24,12 @@ public class LeaderBoard {
     private final TableColumn<ScoreNameAlgorithm, Integer> score = new TableColumn<>("Score");
 
 
+    /**
+     * Make table scene.
+     *
+     * @param scoreNameAlgorithms the score name algorithms
+     * @return the scene
+     */
     public Scene makeTable(ArrayList<ScoreNameAlgorithm> scoreNameAlgorithms) {
         VBox vBox = new VBox();
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -41,6 +50,9 @@ public class LeaderBoard {
         return new Scene(vBox);
     }
 
+    /**
+     * Play again.
+     */
     public void playAgain(){
         Main.restart();
         Timer.closeTimer();

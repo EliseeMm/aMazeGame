@@ -5,8 +5,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+/**
+ * The type Algorithm name.
+ */
 public class AlgorithmName extends Text {
 
+    /**
+     * Algo text text.
+     *
+     * @param algorithmName the algorithm name
+     * @param color         the color
+     * @return the text
+     */
     public static Text algoText(String algorithmName,Color color){
 
         Text text = new Text();

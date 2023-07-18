@@ -11,17 +11,31 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * The type User name scene.
+ */
 public class UserNameScene {
     private Scene scene;
     private final Stage stage;
     private final Scene nextScene;
 
+    /**
+     * Instantiates a new User name scene.
+     *
+     * @param stage the stage
+     * @param scene the scene
+     */
     public UserNameScene(Stage stage, Scene scene) {
         this.stage = stage;
         this.nextScene = scene;
         this.scene = userName();
     }
 
+    /**
+     * User name scene.
+     *
+     * @return the scene
+     */
     public Scene userName() {
         VBox root = new VBox();
         scene = new Scene(root, 200, 200);
@@ -56,10 +70,20 @@ public class UserNameScene {
         return scene;
     }
 
+    /**
+     * Switch scene.
+     *
+     * @param scene the scene
+     */
     public void switchScene(Scene scene) {
         stage.setScene(scene);
     }
 
+    /**
+     * Gets scene.
+     *
+     * @return the scene
+     */
     public Scene getScene() {
         return this.scene;
     }

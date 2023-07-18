@@ -7,12 +7,23 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
+/**
+ * The type Db connect.
+ */
 public class DbConnect {
+    /**
+     * Instantiates a new Db connect.
+     */
     public DbConnect() {
 
     }
 
 
+    /**
+     * Gets connection.
+     *
+     * @return the connection
+     */
     public Connection getConnection() {
         try {
             Connection connection = DriverManager.getConnection("jdbc:sqlite:scores.db");
@@ -23,6 +34,13 @@ public class DbConnect {
         }
     }
 
+
+    /**
+     * Create scores table.
+     *
+     * @param connection the connection
+     * @throws SQLException the sql exception
+     */
     public void createScoresTable(Connection connection) throws SQLException {
         final Statement stmt = connection.createStatement();
         stmt.executeUpdate("CREATE TABLE if NOT EXISTS scores_table(" +
@@ -32,6 +50,15 @@ public class DbConnect {
                 "score INTEGER NOT NULL )");
     }
 
+
+    /**
+     * Add player score.
+     *
+     * @param connection the connection
+     * @param name       the name
+     * @param algorithm  the algorithm
+     * @param score      the score
+     */
     public void addPlayerScore(Connection connection, String name, String algorithm, int score) {
         try (final PreparedStatement stmt = connection.prepareStatement("INSERT INTO scores_table(name,algorithm_type, score) VALUES (?,?,?)")) {
             if (score != 0) {
@@ -45,6 +72,14 @@ public class DbConnect {
         }
     }
 
+
+    /**
+     * Read score table array list.
+     *
+     * @param connection the connection
+     * @return the array list
+     * @throws SQLException the sql exception
+     */
     public ArrayList<ScoreNameAlgorithm> readScoreTable(Connection connection)
             throws SQLException {
         ArrayList<ScoreNameAlgorithm> scoreNameAlgorithms;
