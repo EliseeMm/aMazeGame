@@ -13,9 +13,8 @@ import javafx.stage.Stage;
 
 public class UserNameScene {
     private Scene scene;
-    private String playerName;
-    private Stage stage;
-    private Scene nextScene;
+    private final Stage stage;
+    private final Scene nextScene;
 
     public UserNameScene(Stage stage, Scene scene) {
         this.stage = stage;
@@ -59,10 +58,6 @@ public class UserNameScene {
 
     public void switchScene(Scene scene) {
         stage.setScene(scene);
-    }
-
-    public String getPlayerName() {
-        return playerName;
     }
 
     public Scene getScene() {

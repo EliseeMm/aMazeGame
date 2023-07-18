@@ -224,7 +224,7 @@ public class MazeScene {
         PlayerInfo.setPlayerScore(score);
         DbConnect dbConnect = new DbConnect();
         Connection connection = dbConnect.getConnection();
-        dbConnect.addPlayerScore(connection, PlayerInfo.getPlayerName(), algo, score);
+        dbConnect.addPlayerScore(connection, PlayerInfo.getPlayerName(), algo, PlayerInfo.getPlayerScore());
         dbConnect.readScoreTable(connection);
         LeaderBoard leaderBoard = new LeaderBoard();
         switchScene(leaderBoard.makeTable(dbConnect.readScoreTable(connection)));

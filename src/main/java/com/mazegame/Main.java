@@ -20,7 +20,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        this.stage = stage;
+        Main.stage = stage;
         Grid grid = new Grid(12);
         MazeScene mazeSceneCreator = new MazeScene(stage, grid);
 
@@ -29,9 +29,9 @@ public class Main extends Application {
         UserNameScene userNameSceneCreator = new UserNameScene(stage, algorithmSelectorScene.getScene());
         Scene userNameScene = userNameSceneCreator.getScene();
 //        String playerName = userNameSceneCreator.getPlayerName();
-        this.stage.setScene(userNameScene);
-        this.stage.setTitle("MAZE GAME");
-        this.stage.show();
+        Main.stage.setScene(userNameScene);
+        Main.stage.setTitle("MAZE GAME");
+        Main.stage.show();
     }
     public static void restart(){
         stage.close();
