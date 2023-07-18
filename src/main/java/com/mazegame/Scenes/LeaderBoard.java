@@ -38,9 +38,7 @@ public class LeaderBoard {
 
         tableView.setItems(observableList);
         vBox.getChildren().addAll(tableView, quit,playAgain);
-        Scene scene = new Scene(vBox);
-        System.out.println(observableList);
-        return scene;
+        return new Scene(vBox);
     }
 
     public void playAgain(){

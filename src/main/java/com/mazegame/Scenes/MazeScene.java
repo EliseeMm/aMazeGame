@@ -1,12 +1,13 @@
 package com.mazegame.Scenes;
 
-import com.mazegame.*;
-import com.mazegame.Algorithms.*;
+import com.mazegame.Algorithms.Algorithms;
 import com.mazegame.CellsAndWalls.Cell;
 import com.mazegame.CellsAndWalls.CellType;
 import com.mazegame.CellsAndWalls.Wall;
 import com.mazegame.DatabaseHandler.DbConnect;
-import com.mazegame.ScoresAndNames.ScoreNameAlgorithm;
+import com.mazegame.Grid;
+import com.mazegame.PlayerInfo;
+import com.mazegame.Runner;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -29,18 +30,13 @@ public class MazeScene {
     private int score = 0;
     private final Grid grid;
     private final Stage mazeStage;
-    private String playerName;
     private String algo;
-    private final Stage timeStage;
-    private Timeline timeline;
+    private final Timeline timeline;
     private final Boolean gameOn;
-    private Algorithms algorithms;
-    private String colorWall;
-    private Color endPointColor = Color.STEELBLUE;
-    private ArrayList<ArrayList<Cell>> maze;
+    private final Color endPointColor = Color.STEELBLUE;
 
     public MazeScene(Stage stage, Grid grid) {
-        timeStage = new Stage();
+        Stage timeStage = new Stage();
         this.mazeStage = stage;
         this.grid = grid;
         Timer timer = new Timer();
@@ -50,8 +46,7 @@ public class MazeScene {
     }
 
     public Scene createMazeScene() {
-
-        if(gameOn){
+        if (gameOn) {
             timeline.play();
         }
 
@@ -61,10 +56,10 @@ public class MazeScene {
             int offsetY = 50;
             int obstacleSize = 45;
 
-            GenerateMaze generateMaze = new GenerateMaze(grid,algo);
-            maze = generateMaze.getMaze();
-            colorWall = generateMaze.getColorWall();
-            algorithms = generateMaze.getAlgorithms();
+            GenerateMaze generateMaze = new GenerateMaze(grid, algo);
+            ArrayList<ArrayList<Cell>> maze = generateMaze.getMaze();
+            String colorWall = generateMaze.getColorWall();
+            Algorithms algorithms = generateMaze.getAlgorithms();
 
             ArrayList<Line> lines = new ArrayList<>();
             ArrayList<Rectangle> cells = new ArrayList<>();
@@ -124,10 +119,10 @@ public class MazeScene {
             }
             Rectangle selectedRectangle = getRunnerStartingCell(cells);
             Cell rectangleCentre = findCellCentre(selectedRectangle, obstacleSize);
-            Runner runner = new Runner((int) rectangleCentre.getX(), (int) rectangleCentre.getY(),obstacleSize);
+            Runner runner = new Runner((int) rectangleCentre.getX(), (int) rectangleCentre.getY(), obstacleSize);
             Text text = scoreBoard.scoreBoard(score);
-            Text text1 = AlgorithmName.algoText(algorithms.getAlgorithmName(),algorithms.getAlorithmColor());
-            root.getChildren().addAll(runner,text,text1);
+            Text text1 = AlgorithmName.algoText(algorithms.getAlgorithmName(), algorithms.getAlorithmColor());
+            root.getChildren().addAll(runner, text, text1);
 
             scene = new Scene(root, 700, 700);
             scene.setFill(Color.SKYBLUE);
@@ -226,16 +221,13 @@ public class MazeScene {
     }
 
     public void close() throws FileNotFoundException, SQLException {
-        System.out.println(PlayerInfo.getPlayerName());
         PlayerInfo.setPlayerScore(score);
-        System.out.println(PlayerInfo.getPlayerScore());
         DbConnect dbConnect = new DbConnect();
         Connection connection = dbConnect.getConnection();
-        dbConnect.addPlayerScore(connection,PlayerInfo.getPlayerName(),algo,score);
+        dbConnect.addPlayerScore(connection, PlayerInfo.getPlayerName(), algo, score);
         dbConnect.readScoreTable(connection);
         LeaderBoard leaderBoard = new LeaderBoard();
         switchScene(leaderBoard.makeTable(dbConnect.readScoreTable(connection)));
-//        System.exit(0);
 
     }
 }
