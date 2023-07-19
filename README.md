@@ -8,9 +8,10 @@ of mazes solved) and the users name will be saved to a database if the users sco
 
 # Game Play
 
-The player controls the purple square (know as the runner, which randomly positioned within the maze) around the maze with the goal of reaching the blue square (
-know as the end point). The runner is controlled by using the arrow keys on the keyboard and when the player reaches the
-end point ,and the there is still time,the game generates a new maze with a new starting point for the player.
+The player controls the purple square (know as the runner, which is randomly positioned within the maze) around the maze
+with the goal of reaching the blue square (know as the end point). The runner is controlled by using the arrow keys on 
+the keyboard and when the player reaches the
+end point ,and if there is still time,the game generates a new maze with a new starting point for the player.
 
 Once the timer runs out the game displays the current leaderboard and allows the user to quit or play again.
 
