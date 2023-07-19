@@ -1,11 +1,22 @@
 # aMazeGame
 
-A game that randomly generates a maze using different maze generation algorithms that the user needs to solve
+A game that generates a maze using different maze generation algorithms that the user needs to solve (reach the endpoint).
+The user can select from a list of algorithms or let the game randomly select an algorithm to use after each maze is solved.
 
+The game gives the player 30 seconds to solve as many mazes as possible. When the time runs out, the users Score (number
+of mazes solved) and the users name will be saved to a database if the users score is within the top 5 scores.
+
+# Requires
+1) JavaFx
+2) SQLite
 # Concepts Used and Learnt
 
-Designing a maze requires the use of different algorithms
-and data structures inorder to make the algorithm work
+Designing a maze requires the use of different algorithms and data structures inorder to make the algorithm work 
+and then create a maze
+
+Learnt to use a GUI : This project uses javafx for its scenes and stages. 
+
+Learnt the basics of SQL : This project makes use of SQLite.
 
 # Algorithms
 
@@ -55,3 +66,28 @@ If a cell doesn't have any unvisited neighbors, randomly select a new cell that 
 Data structures used: ArraysLists
 
 Notes: An inefficient algorithm
+
+# JavaFx
+
+Learnt: Stages,Scenes,buttons and tableview.
+
+Was able to switch between scenes to allow for the different parts of the game to work together.
+# SQLite
+SQLite was used to write the players name and scores to a score board/ leaderboard which is then displayed to the current player.
+The player score is added only if their score is within the top 5 and their score is greater than 0.
+
+Used SQLite commands to create a database, create tables within the database, read from the table, write to the table
+and delete records from a table.
+
+# Improvements
+1) Allow the user to select how long the timer goes for. e.g. 30 sec, 45 sec or 1 minute etc.
+2) Allow the user to select the number of leaderboard entries to see e.g. top 5 or top 10
+3) Make the database configurable in its display e.g. see the top 5 for a specific algorithm.
+
+# Known Bugs
+1) Wasn't able to find a way to incorporate the timer stage into the maze scene so that the user can see the time ticking away
+from within the maze scene.
+Currently, the timer shows up on a separate stage behind the maze scene (requiring the player to move the maze stage away
+in order to see the timer.)
+2) The runner (maze runner) tends to shift of the centre of the pathway. Still adheres to boundary rules.
+
