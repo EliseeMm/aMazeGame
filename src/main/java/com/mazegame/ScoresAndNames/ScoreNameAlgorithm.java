@@ -10,7 +10,7 @@ import javafx.beans.property.StringProperty;
 public class ScoreNameAlgorithm {
     private StringProperty name;
     private Integer score;
-    private  String algorithmType;
+    private String algorithmType;
 
     /**
      * Instantiates a new Score name algorithm.
@@ -19,7 +19,7 @@ public class ScoreNameAlgorithm {
      * @param score         the score
      * @param algorithmType the algorithm type
      */
-    public ScoreNameAlgorithm(String name,Integer score,String algorithmType){
+    public ScoreNameAlgorithm(String name, Integer score, String algorithmType) {
         this.name = new SimpleStringProperty(name);
         this.score = score;
         this.algorithmType = algorithmType;
@@ -80,8 +80,8 @@ public class ScoreNameAlgorithm {
     }
 
     @Override
-    public String toString(){
-        return "< Name: " + name +", Algorithm: " + algorithmType + ", Score: " + String.valueOf(score)+">";
+    public String toString() {
+        return "< Name: " + name + ", Algorithm: " + algorithmType + ", Score: " + score + ">";
     }
 
 }

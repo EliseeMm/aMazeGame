@@ -40,7 +40,7 @@ public class AlgorithmSelectorScene {
         ANBButton.setOnAction(actionEvent -> setRequestedAlgo("anb"));
         randomButton.setOnAction(actionEvent -> setRequestedAlgo("random"));
 
-        root.getChildren().addAll(kruskalButton, dfsButton, primButton,ANBButton, randomButton);
+        root.getChildren().addAll(kruskalButton, dfsButton, primButton, ANBButton, randomButton);
         root.setAlignment(Pos.CENTER);
         this.nextScene = nextScene;
         this.stage = stage;

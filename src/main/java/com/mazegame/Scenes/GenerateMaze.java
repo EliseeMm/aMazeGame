@@ -3,6 +3,7 @@ package com.mazegame.Scenes;
 import com.mazegame.Algorithms.*;
 import com.mazegame.CellsAndWalls.Cell;
 import com.mazegame.Grid;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,8 +21,8 @@ public class GenerateMaze {
      * @param grid the grid
      * @param algo the algo
      */
-    public GenerateMaze(Grid grid, String algo){
-        generateMaze(grid,algo);
+    public GenerateMaze(Grid grid, String algo) {
+        generateMaze(grid, algo);
     }
 
     /**
@@ -30,7 +31,7 @@ public class GenerateMaze {
      * @param grid the grid
      * @param algo the algo
      */
-    public void generateMaze(Grid grid, String algo){
+    public void generateMaze(Grid grid, String algo) {
         if (algo.equalsIgnoreCase("kruskal")) {
             algorithms = new Kruskal(grid);
             maze = algorithms.getGridPoints();

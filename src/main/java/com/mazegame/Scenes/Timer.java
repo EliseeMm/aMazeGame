@@ -67,7 +67,7 @@ public class Timer extends Label {
     /**
      * Close timer.
      */
-    public static void closeTimer(){
+    public static void closeTimer() {
         stage.close();
     }
 }

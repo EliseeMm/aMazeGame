@@ -46,14 +46,14 @@ public class LeaderBoard {
         ObservableList<ScoreNameAlgorithm> observableList = FXCollections.observableArrayList(scoreNameAlgorithms);
 
         tableView.setItems(observableList);
-        vBox.getChildren().addAll(tableView, quit,playAgain);
+        vBox.getChildren().addAll(tableView, quit, playAgain);
         return new Scene(vBox);
     }
 
     /**
      * Play again.
      */
-    public void playAgain(){
+    public void playAgain() {
         Main.restart();
         Timer.closeTimer();
         new Main().start(new Stage());

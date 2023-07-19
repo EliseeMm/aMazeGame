@@ -26,16 +26,17 @@ public class AldousBroder implements Algorithms {
      *
      * @param grid the grid
      */
-    public AldousBroder(Grid grid){
+    public AldousBroder(Grid grid) {
         this.mazeOfMazeBlocks = grid;
         gridPoints = grid.makeGrid();
         wallColor = "green";
-        for (ArrayList<Cell> row : gridPoints){
+        for (ArrayList<Cell> row : gridPoints) {
             totalCells.addAll(row);
         }
         algo();
         findEndPoint(gridPoints);
     }
+
     @Override
     public void findEndPoint(ArrayList<ArrayList<Cell>> grid) {
         int rowIndex = random.nextInt(grid.size());
@@ -67,27 +68,26 @@ public class AldousBroder implements Algorithms {
     /**
      * Algo.
      */
-    public void algo(){
-       Cell startingCell = totalCells.remove(random.nextInt(totalCells.size()));
-       visitedCells.add(startingCell);
-        while (!totalCells.isEmpty()){
-            ArrayList<Cell> neighbors =  findNeighbors(startingCell);
+    public void algo() {
+        Cell startingCell = totalCells.remove(random.nextInt(totalCells.size()));
+        visitedCells.add(startingCell);
+        while (!totalCells.isEmpty()) {
+            ArrayList<Cell> neighbors = findNeighbors(startingCell);
 
-            if(!neighbors.isEmpty()) {
+            if (!neighbors.isEmpty()) {
                 Cell neighbor = neighbors.get(random.nextInt(neighbors.size()));
                 startingCell.removeCellWalls(neighbor);
                 startingCell = neighbor;
 
-            }
-
-            else {
+            } else {
                 do {
                     startingCell = totalCells.remove(random.nextInt(totalCells.size()));
-                }while (!visitedCells.contains(startingCell));
+                } while (!visitedCells.contains(startingCell));
             }
             visitedCells.add(startingCell);
         }
     }
+
     private ArrayList<Cell> findNeighbors(Cell gridPoint) {
         ArrayList<Cell> neighbors = new ArrayList<>();
 

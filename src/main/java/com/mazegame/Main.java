@@ -1,7 +1,6 @@
 package com.mazegame;
 
 
-
 import com.mazegame.Scenes.AlgorithmSelectorScene;
 import com.mazegame.Scenes.MazeScene;
 import com.mazegame.Scenes.UserNameScene;
@@ -15,7 +14,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private static Stage  stage;
+    private static Stage stage;
 
     /**
      * The entry point of application.
@@ -45,7 +44,7 @@ public class Main extends Application {
     /**
      * Restart.
      */
-    public static void restart(){
+    public static void restart() {
         stage.close();
     }
 }
