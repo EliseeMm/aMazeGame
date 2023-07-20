@@ -8,10 +8,10 @@ of mazes solved) and the users name will be saved to a database if the users sco
 
 # Game Play
 
-The player controls the purple square (know as the runner, which is randomly positioned within the maze) around the maze
-with the goal of reaching the blue square (know as the end point). The runner is controlled by using the arrow keys on 
+The player controls the purple square (known as the runner, which is randomly positioned within the maze) around the maze
+with the goal of reaching the blue square (known as the end point). The runner is controlled by using the arrow keys on 
 the keyboard and when the player reaches the
-end point ,and if there is still time,the game generates a new maze with a new starting point for the player.
+end point ,given that there is still time,the game generates a new maze with a new starting point for the player.
 
 Once the timer runs out the game displays the current leaderboard and allows the user to quit or play again.
 
@@ -23,9 +23,9 @@ Once the timer runs out the game displays the current leaderboard and allows the
 Designing a maze requires the use of different algorithms and data structures inorder to make the algorithm work 
 and then create a maze
 
-Learnt to use a GUI : This project uses javafx for its scenes and stages. 
+Learnt a GUI : This project uses javafx for its scenes and stages. 
 
-Learnt the basics of SQL : This project makes use of SQLite.
+Learnt SQL : This project makes use of SQLite.
 
 # Algorithms
 
