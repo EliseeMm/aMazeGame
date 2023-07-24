@@ -77,7 +77,7 @@ public class Cell {
      *
      * @return the array list
      */
-    public ArrayList<Wall> cellWalls() {
+    private ArrayList<Wall> cellWalls() {
         ArrayList<Wall> Walls = new ArrayList<>();
         Wall upperWall = new Wall(x, (float) (y + 0.5));
         Wall lowerWall = new Wall(x, (float) (y - 0.5));

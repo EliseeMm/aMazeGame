@@ -68,7 +68,7 @@ public class AldousBroder implements Algorithms {
     /**
      * Algo.
      */
-    public void algo() {
+    private void algo() {
         Cell startingCell = totalCells.remove(random.nextInt(totalCells.size()));
         visitedCells.add(startingCell);
         while (!totalCells.isEmpty()) {
